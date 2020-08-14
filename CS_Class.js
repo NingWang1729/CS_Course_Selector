@@ -7,7 +7,7 @@ function CS_Class (name, units, professors, pre_requisites, co_requisites) {
     this.pre_requisites = pre_requisites;
     this.co_requisites = co_requisites;
     
-    function completed_pre_requisites(completed_classes) {
+    function completed_all_pre_requisites(completed_classes) {
 	for (var i = 0; i <this.pre_requisites.length(); i++) {
 	    var completed = false;
 	    for (var j = 0; j < completed_classes.length(); j++) {
