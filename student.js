@@ -13,4 +13,19 @@ class Student {
 	this.#planned_classes = planned_classes;
     }
 
+    get_name() {
+	return this.#name;
+    }
+
+    get_completed_classes() {
+	return this.#completed_classes;
+    }
+
+    get_current_classes() {
+	return this.#current_classes;
+    }
+
+    get_planned_classes() {
+	return this.#planned_classes;
+    }
 }
