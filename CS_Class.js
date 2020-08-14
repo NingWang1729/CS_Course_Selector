@@ -1,13 +1,22 @@
 const logger = require('./logger');
 
-function CS_Class (name, units, professors, pre_requisites, co_requisites, next_classes) {
-    this.#name = name;
-    this.#units = units;
-    this.#professors = professors;
-    this.#pre_requisites = pre_requisites;
-    this.#co_requisites = co_requisites;
-    this.#next_classes = next_classes;
-    
+class CS_Class {
+    #name;
+    #units;
+    #professors;
+    #pre_requisites;
+    #co_requisites;
+    #next_classes;
+
+    constructor(name, units, professors, pre_requisites, co_requisites, next_classes) {
+	this.#name = name;
+	this.#units = units;
+	this.#professors = professors;
+	this.#pre_requisites = pre_requisites;
+	this.#co_requisites = co_requisites;
+	this.#next_classes = next_classes;
+    }
+
     get_name() {
 	return this.#name;
     }
@@ -32,7 +41,7 @@ function CS_Class (name, units, professors, pre_requisites, co_requisites, next_
 	return this.#next_classes;
     }
 
-    function completed_all_pre_requisites(completed_classes) {
+    completed_all_pre_requisites(completed_classes) {
 	for (var i = 0; i <this.pre_requisites.length(); i++) {
 	    var completed = false;
 	    for (var j = 0; j < completed_classes.length(); j++) {
@@ -48,7 +57,7 @@ function CS_Class (name, units, professors, pre_requisites, co_requisites, next_
 	return true;
     }
 
-    function get_incomplete_pre_requisites(completed_classes) {
+    get_incomplete_pre_requisites(completed_classes) {
 	var todo = [];
 	if (completed_pre_requisites(completed_classes)) {
 	    return todo;
