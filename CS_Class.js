@@ -70,6 +70,6 @@ function CS_Class (name, units, professors, pre_requisites, co_requisites, next_
     }
 };
 
-var cs1 = new CS_Class("CS1", 1, [], [], []);
+var cs1 = new CS_Class("CS1", 1, [], [], [], []);
 
 logger.log(cs1.get_name());
