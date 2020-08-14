@@ -1,6 +1,7 @@
 const logger = require('./logger');
 
 class CS_Class {
+
     #name;
     #units;
     #professors;
