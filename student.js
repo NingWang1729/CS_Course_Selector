@@ -28,4 +28,23 @@ class Student {
     get_planned_classes() {
 	return this.#planned_classes;
     }
+
+    add_class(new_class) {
+	if (this.#completed_classes.indexOf(new_class) == -1) {
+	    this.#completed_classes.push(new_class);
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+
+    add_classes(new_classes) {
+	var ineligible = [];
+	for (int i = 0; i < new_classes.length(); i++) {
+	    if (!add_class(new_classes[i])) {
+		ineligible.push(new_classes[i]);
+	    }
+	}
+	return ineligible;
+    }
 }
