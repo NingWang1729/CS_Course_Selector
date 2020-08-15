@@ -1,1 +1,1 @@
-A Webapp for selection CS courses at UCLA.
+A Webapp for selecting CS courses at UCLA.
