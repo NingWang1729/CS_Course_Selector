@@ -1,6 +1,5 @@
 
 CS_Class
-
 //Private Variables
 -name : String
 -units : Number
