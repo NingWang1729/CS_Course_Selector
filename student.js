@@ -29,27 +29,27 @@ class Student {
 	return this.#planned_classes;
     }
 
-    add_class(new_class) {
-	if (this.#completed_classes.indexOf(new_class) == -1) {
-	    this.#completed_classes.push(new_class);
+    add_completed_class(completed_class) {
+	if (this.#completed_classes.indexOf(completed_class) == -1) {
+	    this.#completed_classes.push(completed_class);
 	    return true;
 	} else {
 	    return false;
 	}
     }
 
-    add_classes(new_classes) {
+    add_completed_classes(completed_classes) {
 	var ineligible = [];
-	for (var i = 0; i < new_classes.length(); i++) {
-	    if (!add_class(new_classes[i])) {
-		ineligible.push(new_classes[i]);
+	for (var i = 0; i < completed_classes.length(); i++) {
+	    if (!add_completed_class(completed_classes[i])) {
+		ineligible.push(completed_classes[i]);
 	    }
 	}
 	return ineligible;
     }
 
-    remove_class(old_class) {
-	var index = this.#completed_classes.indexOf(old_class);
+    remove_completed_class(completed_class) {
+	var index = this.#completed_classes.indexOf(completed_class);
 	if (index != -1) {
 	    this.#completed_classes.splice(index, 1);
 	    return true;
@@ -58,50 +58,112 @@ class Student {
 	}
     }
 
-    remove_classes(old_classes) {
+    remove_completed_classes(completed_classes) {
 	var ineligible = [];
-	for (var i = 0; i < old_classes.length(); i++) {
-	    if (!remove_class(old_classes[i])) {
-		ineligible.push(old_classes[i]);
+	for (var i = 0; i < completed_classes.length(); i++) {
+	    if (!remove_completed_class(completed_classes[i])) {
+		ineligible.push(completed_classes[i]);
 	    }
 	}
 	return ineligible;
     }
 
-    add_class_to_plan(new_class) {
-	if (this.#current_classes.indexOf(new_class) == -1) {
-	    this.##current_classes.push(new_class);
+    add_class(current_class) {
+	if (this.#current_classes.indexOf(current_class) == -1) {
+	    this.#current_classes.push(current_class);
 	    return true;
 	} else {
 	    return false;
 	}
     }
-
-    add_classes_to_plan(new_classes) {
+    
+    add_classes(current_classes) {
 	var ineligible = [];
-	for (var i = 0; i < new_classes.length(); i++) {
-	    if (!add_class(new_classes[i])) {
-		ineligible.push(new_classes[i]);
+	for (var i = 0; i < current_classes.length(); i++) {
+	    if (!add_class(current_classes[i])) {
+		ineligible.push(current_classes[i]);
 	    }
 	}
 	return ineligible;
     }
 
-    remove_class_from_plan(old_class) {
-	var index = this.##current_classes.indexOf(old_class);
+    remove_class(current_class) {
+	var index = this.#current_classes.indexOf(current_class);
 	if (index != -1) {
-	    this.##current_classes.splice(index, 1);
+	    this.#current_classes.splice(index, 1);
 	    return true;
 	} else {
 	    return false;
 	}
     }
 
-    remove_classes_from_plan(old_classes) {
+    remove_classes(current_classes) {
 	var ineligible = [];
-	for (var i = 0; i < old_classes.length(); i++) {
-	    if (!remove_class(old_classes[i])) {
-		ineligible.push(old_classes[i]);
+	for (var i = 0; i < current_classes.length(); i++) {
+	    if (!remove_class(current_classes[i])) {
+		ineligible.push(current_classes[i]);
+	    }
+	}
+	return ineligible;
+    }
+
+    add_class_to_plan(planned_class) {
+	if (this.#planned_classes.indexOf(planned_class) == -1) {
+	    this.#planned_classes.push(planned_class);
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+
+    add_classes_to_plan(planned_classes) {
+	var ineligible = [];
+	for (var i = 0; i < planned_classes.length(); i++) {
+	    if (!add_class_to_plan(planned_classes[i])) {
+		ineligible.push(planned_classes[i]);
+	    }
+	}
+	return ineligible;
+    }
+
+    remove_class_from_plan(planned_class) {
+	var index = this.#planned_classes.indexOf(planned_class);
+	if (index != -1) {
+	    this.#planned_classes.splice(index, 1);
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+
+    remove_classes_from_plan(planned_classes) {
+	var ineligible = [];
+	for (var i = 0; i < planned_classes.length(); i++) {
+	    if (!remove_class_from_plan(planned_classes[i])) {
+		ineligible.push(planned_classes[i]);
+	    }
+	}
+	return ineligible;
+    }
+
+    finish_class(finished_class) {
+	if (this.#current_classes.indexOf(finished_class) != -1) {
+	    if (this.#completed_classes.indexOf(finished_class) == -1) {
+		this.#completed_classes.concat(this.#current_classes.splice(this.#current_classes.indexOf(finished_class), 1));
+		return true;
+	    } else {
+		return false;
+	    }
+	} else {
+	    return false;
+	}
+    }
+	
+    finish_classes(finished_classes) {
+	var ineligible = [];
+	for (var i = 0; i < finished_classes.length(); i++) {
+	    if (!finish_class(finished_classes[i])) {
+		ineligible.push(finished_classes[i]);
 	    }
 	}
 	return ineligible;
