@@ -8,6 +8,9 @@ function App() {
         <title>Hello World!</title>
       </head>
       <body>
+        <main>
+          <p>Paragraph</p>
+        </main>
         <h1>Hello There!</h1>
       </body>
     </html>
