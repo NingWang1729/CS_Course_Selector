@@ -1,37 +1,35 @@
 class Student {
-
-    #name;
-    #completed_classes;
-    #current_classes;
-    #planned_classes;
-    
+    name;
+    completed_classes;
+    current_classes;
+    planned_classes;
     
     constructor(name, completed_classes, current_classes, planned_classes) {
-	this.#name = name;
-	this.#completed_classes = completed_classes;
-	this.#current_classes = current_classes;
-	this.#planned_classes = planned_classes;
+	this.name = name;
+	this.completed_classes = completed_classes;
+	this.current_classes = current_classes;
+	this.planned_classes = planned_classes;
     }
 
     get_name() {
-	return this.#name;
+	return this.name;
     }
 
     get_completed_classes() {
-	return this.#completed_classes;
+	return this.completed_classes;
     }
 
     get_current_classes() {
-	return this.#current_classes;
+	return this.current_classes;
     }
 
     get_planned_classes() {
-	return this.#planned_classes;
+	return this.planned_classes;
     }
 
     add_completed_class(completed_class) {
-	if (this.#completed_classes.indexOf(completed_class) === -1) {
-	    this.#completed_classes.push(completed_class);
+	if (this.completed_classes.indexOf(completed_class) === -1) {
+	    this.completed_classes.push(completed_class);
 	    return true;
 	} else {
 	    return false;
@@ -49,9 +47,9 @@ class Student {
     }
 
     remove_completed_class(completed_class) {
-	var index = this.#completed_classes.indexOf(completed_class);
+	var index = this.completed_classes.indexOf(completed_class);
 	if (index !== -1) {
-	    this.#completed_classes.splice(index, 1);
+	    this.completed_classes.splice(index, 1);
 	    return true;
 	} else {
 	    return false;
@@ -69,8 +67,8 @@ class Student {
     }
 
     add_class(current_class) {
-	if (this.#current_classes.indexOf(current_class) === -1) {
-	    this.#current_classes.push(current_class);
+	if (this.current_classes.indexOf(current_class) === -1) {
+	    this.current_classes.push(current_class);
 	    return true;
 	} else {
 	    return false;
@@ -88,9 +86,9 @@ class Student {
     }
 
     remove_class(current_class) {
-	var index = this.#current_classes.indexOf(current_class);
+	var index = this.current_classes.indexOf(current_class);
 	if (index !== -1) {
-	    this.#current_classes.splice(index, 1);
+	    this.current_classes.splice(index, 1);
 	    return true;
 	} else {
 	    return false;
@@ -108,8 +106,8 @@ class Student {
     }
 
     add_class_to_plan(planned_class) {
-	if (this.#planned_classes.indexOf(planned_class) === -1) {
-	    this.#planned_classes.push(planned_class);
+	if (this.planned_classes.indexOf(planned_class) === -1) {
+	    this.planned_classes.push(planned_class);
 	    return true;
 	} else {
 	    return false;
@@ -127,9 +125,9 @@ class Student {
     }
 
     remove_class_from_plan(planned_class) {
-	var index = this.#planned_classes.indexOf(planned_class);
+	var index = this.planned_classes.indexOf(planned_class);
 	if (index !== -1) {
-	    this.#planned_classes.splice(index, 1);
+	    this.planned_classes.splice(index, 1);
 	    return true;
 	} else {
 	    return false;
@@ -147,9 +145,9 @@ class Student {
     }
 
     finish_class(finished_class) {
-	if (this.#current_classes.indexOf(finished_class) !== -1) {
-	    if (this.#completed_classes.indexOf(finished_class) === -1) {
-		this.#completed_classes.concat(this.#current_classes.splice(this.#current_classes.indexOf(finished_class), 1));
+	if (this.current_classes.indexOf(finished_class) !== -1) {
+	    if (this.completed_classes.indexOf(finished_class) === -1) {
+		this.completed_classes.concat(this.current_classes.splice(this.current_classes.indexOf(finished_class), 1));
 		return true;
 	    } else {
 		return false;
