@@ -15,16 +15,19 @@ function HomeScreen(props) {
     return () => {
     };
   }, []);
-    const pickClass = () => {
-      alert("you picked this class");
-    }
-    return <div className="classes">
-    { 
-      catalog.map((catalog) => 
-        <p className={catalog.name} onClick={pickClass}>{catalog.name}</p>
-      )
-    }
-    </div>
+
+  const pickClass = () => {
+    alert("you picked this class");
+    document.querySelector(".cs_class").classList.add("added");
+  }
+  
+  return <div className="classes">
+  { 
+    catalog.map((catalog) => 
+      <p id = {catalog[0]} className={catalog[0]} className="cs_class" onClick={pickClass}>{catalog[0]}</p>
+    )
+  }
+  </div>
 }
 
 export default HomeScreen;

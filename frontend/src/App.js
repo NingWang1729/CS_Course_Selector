@@ -8,9 +8,16 @@ import HomeScreen from './screens/HomeScreen';
 var cs1 = new CS_Class("CS1", 1, [], [], [], []);
 
 function App() {
+  const clicked = () => {
+    document.querySelector(".header").classList.add("added");
+  }
+
+  // const openMenu = () => {
+  //   document.querySelector(".sidebar").classList.add("open");
+  // }
   return (
     <BrowserRouter>
-      <div>
+      <div  className="header" onClick={clicked}>
         <h1>Hello There, {cs1.get_name()}!</h1>
       </div>
       <main className="main">
