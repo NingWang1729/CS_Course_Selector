@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "cs_course_selector-1",
   "version": "1.0.0",
   "description": "A webapp for selecting CS courses at UCLA.",

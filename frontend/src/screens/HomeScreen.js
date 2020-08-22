@@ -4,7 +4,7 @@ import axios from 'axios';
 
 function HomeScreen(props) {
 
-  const [classes, setProduct] = useState([]);
+  const [catalog, setProduct] = useState([]);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -15,13 +15,16 @@ function HomeScreen(props) {
     return () => {
     };
   }, []);
-
+    const pickClass = () => {
+      alert("you picked this class");
+    }
     return <div className="classes">
     { 
-    <p>{classes.name}</p>
+      catalog.map((catalog) => 
+        <p className={catalog.name} onClick={pickClass}>{catalog.name}</p>
+      )
     }
-  </div>
-
+    </div>
 }
 
 export default HomeScreen;
