@@ -5,10 +5,7 @@ import axios from 'axios';
 function HomeScreen(props) {
 
   const [catalog, setProduct] = useState([]);
-  console.log("catalog is",catalog);
-  console.log(catalog[0]);
-  const class_1 = catalog[0];
-  console.log("class1", class_1);
+  
   useEffect(() => {
     const fetchData = async () => {
       const {data} = await axios.get("/cs_classes");
@@ -26,8 +23,19 @@ function HomeScreen(props) {
         document.querySelector(".cs_class.added").classList.remove("added");
       }, 1000);
   }
+
+  function addClass() {
+    document.querySelector(".CS1").classList.add("added");
+  }
+  function removeClass() {
+    try {
+      document.querySelector(".CS1.added").classList.remove("added");
+    } catch (error) {
+      alert("You cannot remove a class you did not add.");
+    }
+  }
   console.log(catalog.slice(0,1));
-  return (<div className="classes">
+  return (<React.Fragment className="classes">
   { 
     catalog.map((catalog) => 
       <p className={"cs_class"} onClick={pickClass}>{catalog.name}</p>
@@ -36,12 +44,14 @@ function HomeScreen(props) {
   <p>Display just one class</p>
   { 
     catalog.slice(0,1).map((catalog) => 
-      <p className={"cs_class"} onClick={pickClass}>{catalog.name}</p>
+      <span className={"cs_class"} className={"CS1"} onClick={pickClass}>
+        {catalog.name}
+      </span>
     )
   }
-    
-    {/* <h1>{class_1.name}</h1> */}
-  </div>)
+    <button onClick={addClass}>Pick Class</button>
+    <button onClick={removeClass}>Remove Class</button>
+  </React.Fragment>)
   
 }
 
