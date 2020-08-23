@@ -23,17 +23,31 @@ function HomeScreen(props) {
         document.querySelector(".cs_class.added").classList.remove("added");
       }, 1000);
   }
-
-  function addClass() {
+  
+  function addCS1() {
     document.querySelector(".CS1").classList.add("added");
   }
-  function removeClass() {
+  
+  function removeCS1() {
     try {
       document.querySelector(".CS1.added").classList.remove("added");
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
   }
+
+  function addCS31() {
+    document.querySelector('.CS31').classList.add("added");
+  }
+
+  function removeCS31() {
+    try {
+      document.querySelector(".CS31.added").classList.remove("added");
+    } catch (error) {
+      alert("You cannot remove a class you did not add.");
+    }
+  }
+
   console.log(catalog.slice(0,1));
   return (<React.Fragment className="classes">
   { 
@@ -41,18 +55,34 @@ function HomeScreen(props) {
       <p className={"cs_class"} onClick={pickClass}>{catalog.name}</p>
     )
   }
-  <p>Display just one class</p>
+  <p>Display just specific classes</p>
   { 
     catalog.slice(0,1).map((catalog) => 
-      <span className={"cs_class"} className={"CS1"} onClick={pickClass}>
+      <React.Fragment>
+      <span className={"cs_class"} className={catalog.name} onClick={pickClass}>
         {catalog.name}
       </span>
+      <button onClick = {addCS1}>Pick Class</button>
+      <button onClick={removeCS1}>Remove Class</button>
+      <br/>
+      <br/>
+      </React.Fragment>
     )
   }
-    <button onClick={addClass}>Pick Class</button>
-    <button onClick={removeClass}>Remove Class</button>
+  { 
+    catalog.slice(1,2).map((catalog) => 
+      <React.Fragment>
+      <span className={"cs_class"} className={catalog.name} onClick={pickClass}>
+        {catalog.name}
+      </span>
+      <button onClick = {addCS31}>Pick Class</button>
+      <button onClick={removeCS31}>Remove Class</button>
+      <br/>
+      <br/>
+      </React.Fragment>
+    )
+  }
   </React.Fragment>)
-  
 }
 
 export default HomeScreen;
