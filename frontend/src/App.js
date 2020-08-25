@@ -8,9 +8,6 @@ function App() {
     document.querySelector(".header").classList.add("added");
   }
 
-  // const openMenu = () => {
-  //   document.querySelector(".sidebar").classList.add("open");
-  // }
   return (
     <BrowserRouter>
       <div  className="header" onClick={clicked}>
