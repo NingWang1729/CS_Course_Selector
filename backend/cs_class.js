@@ -1,4 +1,5 @@
 class CS_Class {
+	id;
     name;
     units;
     professors;
@@ -6,7 +7,8 @@ class CS_Class {
     co_requisites;
     next_classes;
 
-    constructor(name, units, professors, pre_requisites, co_requisites, next_classes) {
+    constructor(id, name, units, professors, pre_requisites, co_requisites, next_classes) {
+	this.id = id;
 	this.name = name;
 	this.units = units;
 	this.professors = professors;
@@ -14,6 +16,10 @@ class CS_Class {
 	this.co_requisites = co_requisites;
 	this.next_classes = next_classes;
     }
+
+	get_id() {
+		return this.id;
+	}
 
     get_name() {
 	return this.name;

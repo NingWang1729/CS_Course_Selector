@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function HomeScreen(props) {
-  const calender = [];
+  //Currently using an array for student rather than object
+  var student = [];
 
   const [catalog, setProduct] = useState([]);
   
@@ -17,6 +18,7 @@ function HomeScreen(props) {
     };
   }, []);
 
+  //This function is outdated and can be ignored
   const pickClass = () => {
     alert("you picked this class");
       document.querySelector(".cs_class").classList.add("added");
@@ -25,29 +27,46 @@ function HomeScreen(props) {
       }, 1000);
   }
   
+  //Displays the classes that have been selected on the homepage dynamically
   function updateDisplay() {
     document.querySelector(".class_display").textContent = "Your current classes: ";
-    for (var i = 0; i < calender.length; i++) {
-      document.querySelector(".class_display").textContent += "\"" + calender[i] + ",\" ";
+    for (var i = 0; i < student.length; i++) {
+      document.querySelector(".class_display").textContent += "\"" + student[i] + ",\" ";
     }
   }
 
+  //Currently only returns false if pre-reqs not met.
+  //Does not yet display what classes are missing.
+  function verifyPrerequisites(id) {
+    console.log("ID entered is ", id);
+    console.log("This correlates to class: ", catalog[id].name);
+    console.log("The prereqs are: ", catalog[id].pre_requisites);
+    console.log("You have taken: ", student);
+    for (var i in catalog[id].pre_requisites) {
+      console.log("checking if prereq ", i, " is met");
+      if (student.indexOf(catalog[id].pre_requisites[i]) === -1) {
+        console.log("Class", catalog[id].pre_requisites[i], "is not met!");
+        return false;
+      }
+    }
+    return true;
+  }
   function addCS1() {
-    if (calender.indexOf("CS1") === -1) {
+    if (student.indexOf("CS1") === -1) {
       document.querySelector('.CS1').classList.add("added");
-      calender.push("CS1");
-      console.log(calender);
+      student.push("CS1");
+      console.log(student);
       updateDisplay();
     } else {
-      alert("You have already added this class!");
+      alert("You have already added this class or have not met pre-requisites!");
     }
   }
   
   function removeCS1() {
     try {
       document.querySelector(".CS1.added").classList.remove("added");
-      calender.splice(calender.indexOf("CS1"), 1);
-      console.log(calender);
+      student.splice(student.indexOf("CS1"), 1);
+      console.log(student);
       updateDisplay();
     } catch (error) {
       alert("You cannot remove a class you did not add.");
@@ -55,43 +74,43 @@ function HomeScreen(props) {
   }
 
   function addCS31() {
-    if (calender.indexOf("CS31") === -1) {
+    if (student.indexOf("CS31") === -1) {
       document.querySelector('.CS31').classList.add("added");
-      calender.push("CS31");
-      console.log(calender);
-      updateDisplay()
+      student.push("CS31");
+      console.log(student);
+      updateDisplay();
     } else {
-      alert("You have already added this class!");
+      alert("You have already added this class or have not met pre-requisites!");
     }
   }
 
   function removeCS31() {
     try {
       document.querySelector(".CS31.added").classList.remove("added");
-      calender.splice(calender.indexOf("CS31"), 1);
-      console.log(calender);
-      updateDisplay()
+      student.splice(student.indexOf("CS31"), 1);
+      console.log(student);
+      updateDisplay();
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
   }
   function addCS32() {
-    if (calender.indexOf("CS32") === -1) {
+    if (student.indexOf("CS32") === -1 && verifyPrerequisites(2)) {
       document.querySelector('.CS32').classList.add("added");
-      calender.push("CS32");
-      console.log(calender);
-      updateDisplay()
+      student.push("CS32");
+      console.log(student);
+      updateDisplay();
     } else {
-      alert("You have already added this class!");
+      alert("You have already added this class or have not met pre-requisites!");
     }
   }
 
   function removeCS32() {
     try {
       document.querySelector(".CS32.added").classList.remove("added");
-      calender.splice(calender.indexOf("CS32"), 1);
-      console.log(calender);
-      updateDisplay()
+      student.splice(student.indexOf("CS32"), 1);
+      console.log(student);
+      updateDisplay();
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
