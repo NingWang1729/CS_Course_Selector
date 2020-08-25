@@ -38,7 +38,7 @@ function HomeScreen(props) {
   }
 
   function addCompletedClass(class_id) {
-    if (student.completed_classes.indexOf(catalog[class_id].name) === -1) {
+    if (!student.is_scheduled(catalog[class_id].name)) {
       let tag = "." + catalog[class_id].name;
       document.querySelector(tag).classList.add("added");
       student.completed_classes.push(catalog[class_id].name);
@@ -62,7 +62,7 @@ function HomeScreen(props) {
   }
 
   function addClass(class_id) {
-    if (student.current_classes.indexOf(catalog[class_id].name) === -1 && verifyPrerequisites(class_id)) {
+    if (!student.is_scheduled(catalog[class_id].name) && verifyPrerequisites(class_id)) {
       let tag = "." + catalog[class_id].name;
       document.querySelector(tag).classList.add("added");
       student.current_classes.push(catalog[class_id].name);
@@ -85,24 +85,24 @@ function HomeScreen(props) {
     }
   }
 
-  function addClass(class_id) {
-    if (student.current_classes.indexOf(catalog[class_id].name) === -1 && verifyPrerequisites(class_id)) {
+  function addClassToPlan(class_id) {
+    if (!student.is_scheduled(catalog[class_id].name)) {
       let tag = "." + catalog[class_id].name;
       document.querySelector(tag).classList.add("added");
-      student.current_classes.push(catalog[class_id].name);
-      console.log(student.current_classes);
+      student.planned_classes.push(catalog[class_id].name);
+      console.log(student.planned_classes);
       updateDisplay();
     } else {
       alert("You have already added this class or have not met pre-requisites!");
     }
   }
 
-  function removeClass(class_id) {
+  function removeClassFromPlan(class_id) {
     try {
       let tag = "." + catalog[class_id].name + ".added";
       document.querySelector(tag).classList.remove("added");
-      student.current_classes.splice(student.current_classes.indexOf(catalog[class_id].name), 1);
-      console.log(student.current_classes);
+      student.current_classes.splice(student.planned_classes.indexOf(catalog[class_id].name), 1);
+      console.log(student.planned_classes);
       updateDisplay();
     } catch (error) {
       alert("You cannot remove a class you did not add.");
@@ -142,8 +142,8 @@ function HomeScreen(props) {
       <button onClick={removeCompletedClass.bind(this, 0)}>Remove Credit</button>
       <button onClick = {addClass.bind(this, 0)}>Pick Class</button>
       <button onClick={removeClass.bind(this, 0)}>Remove Class</button>
-      <button onClick = {addClass.bind(this, 0)}>Pick Class</button>
-      <button onClick={removeClass.bind(this, 0)}>Remove Class</button>
+      <button onClick = {addClassToPlan.bind(this, 0)}>Add Class To Plan</button>
+      <button onClick={removeClassFromPlan.bind(this, 0)}>Remove From Plan</button>
       <br/>
       <br/>
       </React.Fragment>
@@ -159,8 +159,8 @@ function HomeScreen(props) {
       <button onClick={removeCompletedClass.bind(this, 1)}>Remove Credit</button>
       <button onClick = {addClass.bind(this, 1)}>Pick Class</button>
       <button onClick={removeClass.bind(this, 1)}>Remove Class</button>
-      <button onClick = {addClass.bind(this, 1)}>Pick Class</button>
-      <button onClick={removeClass.bind(this, 1)}>Remove Class</button>
+      <button onClick = {addClassToPlan.bind(this, 1)}>Add Class To Plan</button>
+      <button onClick={removeClassFromPlan.bind(this, 1)}>Remove From Plan</button>
       <br/>
       <br/>
       </React.Fragment>
@@ -176,8 +176,8 @@ function HomeScreen(props) {
       <button onClick={removeCompletedClass.bind(this, 2)}>Remove Credit</button>
       <button onClick = {addClass.bind(this, 2)}>Pick Class</button>
       <button onClick={removeClass.bind(this, 2)}>Remove Class</button>
-      <button onClick = {addClass.bind(this, 2)}>Pick Class</button>
-      <button onClick={removeClass.bind(this, 2)}>Remove Class</button>
+      <button onClick = {addClassToPlan.bind(this, 2)}>Add Class To Plan</button>
+      <button onClick={removeClassFromPlan.bind(this, 2)}>Remove From Plan</button>
       <br/>
       <br/>
       </React.Fragment>

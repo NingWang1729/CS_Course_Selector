@@ -27,6 +27,12 @@ class Student {
 	return this.planned_classes;
     }
 
+	is_scheduled(class_name) {
+		return this.completed_classes.indexOf(class_name) !== -1
+				|| this.current_classes.indexOf(class_name) !== -1
+				|| this.planned_classes.indexOf(class_name) !== -1;
+	}
+
     add_completed_class(completed_class) {
 	if (this.completed_classes.indexOf(completed_class) === -1) {
 	    this.completed_classes.push(completed_class);
