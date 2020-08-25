@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Student from '../student.js';
 
 function HomeScreen(props) {
-  //Currently using an array for student rather than object
-  var student = [];
+  //Currently using an array for student.current_classes rather than object
+  // var student.current_classes = [];
+  //Name, completed classes, current classes, 
+  var student = new Student("Bruin", [], [],[]);
 
   const [catalog, setProduct] = useState([]);
   
@@ -19,11 +22,11 @@ function HomeScreen(props) {
   }, []);
 
   function addClass(class_id) {
-    if (student.indexOf(catalog[class_id].name) === -1 && verifyPrerequisites(class_id)) {
+    if (student.current_classes.indexOf(catalog[class_id].name) === -1 && verifyPrerequisites(class_id)) {
       let tag = "." + catalog[class_id].name;
       document.querySelector(tag).classList.add("added");
-      student.push(catalog[class_id].name);
-      console.log(student);
+      student.current_classes.push(catalog[class_id].name);
+      console.log(student.current_classes);
       updateDisplay();
     } else {
       alert("You have already added this class or have not met pre-requisites!");
@@ -34,8 +37,8 @@ function HomeScreen(props) {
     try {
       let tag = "." + catalog[class_id].name + ".added";
       document.querySelector(tag).classList.remove("added");
-      student.splice(student.indexOf(catalog[class_id].name), 1);
-      console.log(student);
+      student.current_classes.splice(student.current_classes.indexOf(catalog[class_id].name), 1);
+      console.log(student.current_classes);
       updateDisplay();
     } catch (error) {
       alert("You cannot remove a class you did not add.");
@@ -45,8 +48,8 @@ function HomeScreen(props) {
   //Displays the classes that have been selected on the homepage dynamically
   function updateDisplay() {
     document.querySelector(".class_display").textContent = "Your current classes: ";
-    for (var i = 0; i < student.length; i++) {
-      document.querySelector(".class_display").textContent += "\"" + student[i] + ",\" ";
+    for (var i = 0; i < student.current_classes.length; i++) {
+      document.querySelector(".class_display").textContent += "\"" + student.current_classes[i] + ",\" ";
     }
   }
 
@@ -56,10 +59,10 @@ function HomeScreen(props) {
     console.log("ID entered is ", id);
     console.log("This correlates to class: ", catalog[id].name);
     console.log("The prereqs are: ", catalog[id].pre_requisites);
-    console.log("You have taken: ", student);
+    console.log("You have taken: ", student.current_classes);
     for (var i in catalog[id].pre_requisites) {
       console.log("checking if prereq ", i, " is met");
-      if (student.indexOf(catalog[id].pre_requisites[i]) === -1) {
+      if (student.current_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
         console.log("Class", catalog[id].pre_requisites[i], "is not met!");
         return false;
       }

@@ -1,8 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 import './App.css';
-import CS_Class from './cs_class.js';
-import Student from './student.js';
 import HomeScreen from './screens/HomeScreen';
 
 function App() {
