@@ -6,11 +6,11 @@ import Student from '../student.js';
 function HomeScreen(props) {
   //Currently using an array for student.current_classes rather than object
   // var student.current_classes = [];
-  //Name, completed classes, current classes, 
+  //Name, completed classes, current classes,
   var student = new Student("Bruin", [], [],[]);
 
   const [catalog, setProduct] = useState([]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       const {data} = await axios.get("/cs_classes");
