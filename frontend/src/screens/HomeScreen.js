@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 function HomeScreen(props) {
+  const calender = [];
 
   const [catalog, setProduct] = useState([]);
   
@@ -25,24 +26,40 @@ function HomeScreen(props) {
   }
   
   function addCS1() {
-    document.querySelector(".CS1").classList.add("added");
+    if (calender.indexOf("CS1") === -1) {
+      document.querySelector('.CS1').classList.add("added");
+      calender.push("CS1");
+      console.log(calender);
+    } else {
+      alert("You have already added this class!");
+    }
   }
   
   function removeCS1() {
     try {
       document.querySelector(".CS1.added").classList.remove("added");
+      calender.splice(calender.indexOf("CS1"));
+      console.log(calender);
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
   }
 
   function addCS31() {
-    document.querySelector('.CS31').classList.add("added");
+    if (calender.indexOf("CS31") === -1) {
+      document.querySelector('.CS31').classList.add("added");
+      calender.push("CS31");
+      console.log(calender);
+    } else {
+      alert("You have already added this class!");
+    }
   }
 
   function removeCS31() {
     try {
       document.querySelector(".CS31.added").classList.remove("added");
+      calender.splice(calender.indexOf("CS31"));
+      console.log(calender);
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
