@@ -47,9 +47,17 @@ function HomeScreen(props) {
   
   //Displays the classes that have been selected on the homepage dynamically
   function updateDisplay() {
-    document.querySelector(".class_display").textContent = "Your current classes: ";
+    document.querySelector(".class-display-1").textContent = "Your completed classes: ";
+    for (var i = 0; i < student.completed_classes.length; i++) {
+      document.querySelector(".class-display-1").textContent += "\"" + student.completed_classes[i] + ",\" ";
+    }
+    document.querySelector(".class-display-2").textContent = "Your current classes: ";
     for (var i = 0; i < student.current_classes.length; i++) {
-      document.querySelector(".class_display").textContent += "\"" + student.current_classes[i] + ",\" ";
+      document.querySelector(".class-display-2").textContent += "\"" + student.current_classes[i] + ",\" ";
+    }
+    document.querySelector(".class-display-3").textContent = "Your planned classes: ";
+    for (var i = 0; i < student.planned_classes.length; i++) {
+      document.querySelector(".class-display-3").textContent += "\"" + student.planned_classes[i] + ",\" ";
     }
   }
 
@@ -71,7 +79,9 @@ function HomeScreen(props) {
   }
 
   return (<React.Fragment>
-  <h2 className="class_display">Your current classes:</h2>
+  <h2 className="class-display-1">Your completed classes:</h2>
+  <h2 className="class-display-2">Your current classes:</h2>
+  <h2 className="class-display-3">Your planned classes:</h2>
   { 
     catalog.slice(0,1).map((catalog) => 
       <React.Fragment>
