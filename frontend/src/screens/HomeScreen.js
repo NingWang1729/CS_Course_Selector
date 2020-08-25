@@ -117,13 +117,7 @@ function HomeScreen(props) {
   }
   console.log(catalog.slice(0,1));
   return (<React.Fragment>
-  {
-    catalog.map((catalog) => 
-      <p className={"cs_class"} onClick={pickClass}>{catalog.name}</p>
-    )
-  }
-  <p>Display just specific classes</p>
-  <p className="class_display">Your current classes:</p>
+  <h2 className="class_display">Your current classes:</h2>
   { 
     catalog.slice(0,1).map((catalog) => 
       <React.Fragment>
