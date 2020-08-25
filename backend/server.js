@@ -4,14 +4,11 @@ import Catalog from './cs_class_catelog.js';
 
 // import Student from './student.js';
 
-const cs1 = new CS_Class("CS1", 1, [], [], [], []);
 const catalog = Catalog;
-const arr = [cs1, catalog];
 
 const app = express();
 
 app.get("/cs_classes", (req, res) => {
-    // res.send(arr);
     res.send(catalog);
 })
 
