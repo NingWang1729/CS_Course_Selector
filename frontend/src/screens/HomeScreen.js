@@ -18,13 +18,28 @@ function HomeScreen(props) {
     };
   }, []);
 
-  //This function is outdated and can be ignored
-  const pickClass = () => {
-    alert("you picked this class");
-      document.querySelector(".cs_class").classList.add("added");
-      setTimeout(() => {
-        document.querySelector(".cs_class.added").classList.remove("added");
-      }, 1000);
+  function addClass(class_id) {
+    if (student.indexOf(catalog[class_id].name) === -1 && verifyPrerequisites(class_id)) {
+      let tag = "." + catalog[class_id].name;
+      document.querySelector(tag).classList.add("added");
+      student.push(catalog[class_id].name);
+      console.log(student);
+      updateDisplay();
+    } else {
+      alert("You have already added this class or have not met pre-requisites!");
+    }
+  }
+
+  function removeClass(class_id) {
+    try {
+      let tag = "." + catalog[class_id].name + ".added";
+      document.querySelector(tag).classList.remove("added");
+      student.splice(student.indexOf(catalog[class_id].name), 1);
+      console.log(student);
+      updateDisplay();
+    } catch (error) {
+      alert("You cannot remove a class you did not add.");
+    }
   }
   
   //Displays the classes that have been selected on the homepage dynamically
@@ -51,81 +66,17 @@ function HomeScreen(props) {
     }
     return true;
   }
-  function addCS1() {
-    if (student.indexOf("CS1") === -1) {
-      document.querySelector('.CS1').classList.add("added");
-      student.push("CS1");
-      console.log(student);
-      updateDisplay();
-    } else {
-      alert("You have already added this class or have not met pre-requisites!");
-    }
-  }
-  
-  function removeCS1() {
-    try {
-      document.querySelector(".CS1.added").classList.remove("added");
-      student.splice(student.indexOf("CS1"), 1);
-      console.log(student);
-      updateDisplay();
-    } catch (error) {
-      alert("You cannot remove a class you did not add.");
-    }
-  }
 
-  function addCS31() {
-    if (student.indexOf("CS31") === -1) {
-      document.querySelector('.CS31').classList.add("added");
-      student.push("CS31");
-      console.log(student);
-      updateDisplay();
-    } else {
-      alert("You have already added this class or have not met pre-requisites!");
-    }
-  }
-
-  function removeCS31() {
-    try {
-      document.querySelector(".CS31.added").classList.remove("added");
-      student.splice(student.indexOf("CS31"), 1);
-      console.log(student);
-      updateDisplay();
-    } catch (error) {
-      alert("You cannot remove a class you did not add.");
-    }
-  }
-  function addCS32() {
-    if (student.indexOf("CS32") === -1 && verifyPrerequisites(2)) {
-      document.querySelector('.CS32').classList.add("added");
-      student.push("CS32");
-      console.log(student);
-      updateDisplay();
-    } else {
-      alert("You have already added this class or have not met pre-requisites!");
-    }
-  }
-
-  function removeCS32() {
-    try {
-      document.querySelector(".CS32.added").classList.remove("added");
-      student.splice(student.indexOf("CS32"), 1);
-      console.log(student);
-      updateDisplay();
-    } catch (error) {
-      alert("You cannot remove a class you did not add.");
-    }
-  }
-  console.log(catalog.slice(0,1));
   return (<React.Fragment>
   <h2 className="class_display">Your current classes:</h2>
   { 
     catalog.slice(0,1).map((catalog) => 
       <React.Fragment>
-      <span className={"cs_class"} className={catalog.name} onClick={pickClass}>
+      <span className={"cs_class"} className={catalog.name}>
         {catalog.name}
       </span>
-      <button onClick = {addCS1}>Pick Class</button>
-      <button onClick={removeCS1}>Remove Class</button>
+      <button onClick = {addClass.bind(this, 0)}>Pick Class</button>
+      <button onClick={removeClass.bind(this, 0)}>Remove Class</button>
       <br/>
       <br/>
       </React.Fragment>
@@ -134,11 +85,11 @@ function HomeScreen(props) {
   { 
     catalog.slice(1,2).map((catalog) => 
       <React.Fragment>
-      <span className={"cs_class"} className={catalog.name} onClick={pickClass}>
+      <span className={"cs_class"} className={catalog.name}>
         {catalog.name}
       </span>
-      <button onClick = {addCS31}>Pick Class</button>
-      <button onClick={removeCS31}>Remove Class</button>
+      <button onClick = {addClass.bind(this, 1)}>Pick Class</button>
+      <button onClick={removeClass.bind(this, 1)}>Remove Class</button>
       <br/>
       <br/>
       </React.Fragment>
@@ -147,11 +98,11 @@ function HomeScreen(props) {
   { 
     catalog.slice(2,3).map((catalog) => 
       <React.Fragment>
-      <span className={"cs_class"} className={catalog.name} onClick={pickClass}>
+      <span className={"cs_class"} className={catalog.name}>
         {catalog.name}
       </span>
-      <button onClick = {addCS32}>Pick Class</button>
-      <button onClick={removeCS32}>Remove Class</button>
+      <button onClick = {addClass.bind(this, 2)}>Pick Class</button>
+      <button onClick={removeClass.bind(this, 2)}>Remove Class</button>
       <br/>
       <br/>
       </React.Fragment>
