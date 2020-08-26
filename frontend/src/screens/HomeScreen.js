@@ -38,6 +38,77 @@ function HomeScreen(props) {
     }
   }
 
+  //Currently only returns false if pre-reqs not met.
+  //Does not yet display what classes are missing.
+  //TODO: Use the class method for verifyPrerequisites
+  function verifyPrerequisites(id) {
+    console.log("ID entered is ", id);
+    console.log("This correlates to class: ", catalog[id].name);
+    console.log("The prereqs are: ", catalog[id].pre_requisites);
+    console.log("You have taken: ", student.completed_classes);
+    for (var i in catalog[id].pre_requisites) {
+      console.log("checking if prereq ", i, " is met");
+      if (student.completed_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
+        console.log("Class", catalog[id].pre_requisites[i], "is not met!");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function verifyPlannedPrerequisites(id) {
+    console.log("ID entered is ", id);
+    console.log("This correlates to class: ", catalog[id].name);
+    console.log("The prereqs are: ", catalog[id].pre_requisites);
+    console.log("You have taken: ", student.completed_classes);
+    console.log("You will have taken: ", student.current_classes);
+    for (var i in catalog[id].pre_requisites) {
+      console.log("checking if prereq ", i, " is met");
+      if (student.completed_classes.indexOf(catalog[id].pre_requisites[i]) === -1
+          && student.current_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
+        console.log("Class", catalog[id].pre_requisites[i], "is not met!");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function verifyCorequisites(id) {
+    console.log("ID entered is ", id);
+    console.log("This correlates to class: ", catalog[id].name);
+    console.log("The coreqs are: ", catalog[id].co_requisites);
+    console.log("You have taken: ", student.completed_classes);
+    console.log("You are taking: ", student.current_classes);
+    for (var i in catalog[id].co_requisites) {
+      console.log("checking if prereq ", i, " is met");
+      if (student.completed_classes.indexOf(catalog[id].co_requisites[i]) === -1
+          && student.current_classes.indexOf(catalog[id].co_requisites[i]) === -1) {
+        console.log("Class", catalog[id].co_requisites[i], "is not met!");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function verifyPlannedCorequisites(id) {
+    console.log("ID entered is ", id);
+    console.log("This correlates to class: ", catalog[id].name);
+    console.log("The coreqs are: ", catalog[id].co_requisites);
+    console.log("You have taken: ", student.completed_classes);
+    console.log("You are taking: ", student.current_classes);
+    console.log("You will be taking: ", student.planned_classes);
+    for (var i in catalog[id].co_requisites) {
+      console.log("checking if prereq ", i, " is met");
+      if (student.completed_classes.indexOf(catalog[id].co_requisites[i]) === -1
+          && student.current_classes.indexOf(catalog[id].co_requisites[i]) === -1
+          && student.planned_classes.indexOf(catalog[id].co_requisites[i]) === -1) {
+        console.log("Class", catalog[id].co_requisites[i], "is not met!");
+        return false;
+      }
+    }
+    return true;
+  }
+
   function addCompletedClass(class_id) {
     try {
       if (!student.is_scheduled(catalog[class_id].name)) {
@@ -54,6 +125,7 @@ function HomeScreen(props) {
     }
   }
 
+  //TODO: Remove or warn other classes that may not be applicable
   function removeCompletedClass(class_id) {
     try {
       if (student.completed_classes.indexOf(catalog[class_id].name) !== -1) {
@@ -63,16 +135,16 @@ function HomeScreen(props) {
         console.log(student.completed_classes);
         updateDisplay();
       } else {
-        throw Error;
+        throw Error("You cannot remove a class you did not complete.");
       }
     } catch (error) {
-      alert("You cannot remove a class you did not add.");
+      alert(error);
     }
   }
 
   function addClass(class_id) {
     try {
-      if (!student.is_scheduled(catalog[class_id].name) && verifyPrerequisites(class_id)) {
+      if (!student.is_scheduled(catalog[class_id].name) && verifyPrerequisites(class_id) && verifyCorequisites(class_id)) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("added");
         student.current_classes.push(catalog[class_id].name);
@@ -104,7 +176,8 @@ function HomeScreen(props) {
 
   function addClassToPlan(class_id) {
     try {
-      if (!student.is_scheduled(catalog[class_id].name)) {
+      console.log("Adding class to plan");
+      if (!student.is_scheduled(catalog[class_id].name) && verifyPlannedPrerequisites(class_id)/* && verifyPlannedCorequisites(class_id)*/) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("added");
         student.planned_classes.push(catalog[class_id].name);
@@ -132,25 +205,6 @@ function HomeScreen(props) {
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
-  }
-
-  //Currently only returns false if pre-reqs not met.
-  //Does not yet display what classes are missing.
-  //TODO: Use the class method for verifyPrerequisites
-  function verifyPrerequisites(id) {
-    console.log("ID entered is ", id);
-    console.log("This correlates to class: ", catalog[id].name);
-    console.log("The prereqs are: ", catalog[id].pre_requisites);
-    console.log("You have taken: ", student.current_classes);
-    for (var i in catalog[id].pre_requisites) {
-      console.log("checking if prereq ", i, " is met");
-      if (student.completed_classes.indexOf(catalog[id].pre_requisites[i]) === -1
-          && student.current_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
-        console.log("Class", catalog[id].pre_requisites[i], "is not met!");
-        return false;
-      }
-    }
-    return true;
   }
 
   return (<React.Fragment>
