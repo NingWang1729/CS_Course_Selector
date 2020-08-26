@@ -23,6 +23,7 @@ function HomeScreen(props) {
 
   //Displays the classes that have been selected on the homepage dynamically
   function updateDisplay() {
+    console.log("Updating display...");
     document.querySelector(".class-display-1").textContent = "Your completed classes: ";
     for (var i = 0; i < student.completed_classes.length; i++) {
       document.querySelector(".class-display-1").textContent += "\"" + student.completed_classes[i] + ",\" ";
@@ -38,72 +39,96 @@ function HomeScreen(props) {
   }
 
   function addCompletedClass(class_id) {
-    if (!student.is_scheduled(catalog[class_id].name)) {
-      let tag = "." + catalog[class_id].name;
-      document.querySelector(tag).classList.add("added");
-      student.completed_classes.push(catalog[class_id].name);
-      console.log(student.completed_classes);
-      updateDisplay();
-    } else {
-      alert("You have already added this class or have not met pre-requisites!");
+    try {
+      if (!student.is_scheduled(catalog[class_id].name)) {
+        let tag = "." + catalog[class_id].name;
+        document.querySelector(tag).classList.add("added");
+        student.completed_classes.push(catalog[class_id].name);
+        console.log(student.completed_classes);
+        updateDisplay();
+      } else {
+        alert("You have already added this class or have not met pre-requisites!");
+      }
+    } catch (error) {
+      alert("ERROR");
     }
   }
 
   function removeCompletedClass(class_id) {
     try {
-      let tag = "." + catalog[class_id].name + ".added";
-      document.querySelector(tag).classList.remove("added");
-      student.completed_classes.splice(student.completed_classes.indexOf(catalog[class_id].name), 1);
-      console.log(student.completed_classes);
-      updateDisplay();
+      if (student.completed_classes.indexOf(catalog[class_id].name) !== -1) {
+        let tag = "." + catalog[class_id].name + ".added";
+        document.querySelector(tag).classList.remove("added");
+        student.completed_classes.splice(student.completed_classes.indexOf(catalog[class_id].name), 1);
+        console.log(student.completed_classes);
+        updateDisplay();
+      } else {
+        throw Error;
+      }
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
   }
 
   function addClass(class_id) {
-    if (!student.is_scheduled(catalog[class_id].name) && verifyPrerequisites(class_id)) {
-      let tag = "." + catalog[class_id].name;
-      document.querySelector(tag).classList.add("added");
-      student.current_classes.push(catalog[class_id].name);
-      console.log(student.current_classes);
-      updateDisplay();
-    } else {
-      alert("You have already added this class or have not met pre-requisites!");
+    try {
+      if (!student.is_scheduled(catalog[class_id].name) && verifyPrerequisites(class_id)) {
+        let tag = "." + catalog[class_id].name;
+        document.querySelector(tag).classList.add("added");
+        student.current_classes.push(catalog[class_id].name);
+        console.log(student.current_classes);
+        updateDisplay();
+      } else {
+        alert("You have already added this class or have not met pre-requisites!");
+      }
+    } catch (error) {
+      alert("ERROR");
     }
   }
 
   function removeClass(class_id) {
     try {
-      let tag = "." + catalog[class_id].name + ".added";
-      document.querySelector(tag).classList.remove("added");
-      student.current_classes.splice(student.current_classes.indexOf(catalog[class_id].name), 1);
-      console.log(student.current_classes);
-      updateDisplay();
+      if (student.current_classes.indexOf(catalog[class_id].name) !== -1) {
+        let tag = "." + catalog[class_id].name + ".added";
+        document.querySelector(tag).classList.remove("added");
+        student.current_classes.splice(student.current_classes.indexOf(catalog[class_id].name), 1);
+        console.log(student.current_classes);
+        updateDisplay();
+      } else {
+        throw Error;
+      }
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
   }
 
   function addClassToPlan(class_id) {
-    if (!student.is_scheduled(catalog[class_id].name)) {
-      let tag = "." + catalog[class_id].name;
-      document.querySelector(tag).classList.add("added");
-      student.planned_classes.push(catalog[class_id].name);
-      console.log(student.planned_classes);
-      updateDisplay();
-    } else {
-      alert("You have already added this class or have not met pre-requisites!");
+    try {
+      if (!student.is_scheduled(catalog[class_id].name)) {
+        let tag = "." + catalog[class_id].name;
+        document.querySelector(tag).classList.add("added");
+        student.planned_classes.push(catalog[class_id].name);
+        console.log(student.planned_classes);
+        updateDisplay();
+      } else {
+        alert("You have already added this class or have not met pre-requisites!");
+      }
+    } catch {
+      alert("ERROR");
     }
   }
 
   function removeClassFromPlan(class_id) {
     try {
-      let tag = "." + catalog[class_id].name + ".added";
-      document.querySelector(tag).classList.remove("added");
-      student.current_classes.splice(student.planned_classes.indexOf(catalog[class_id].name), 1);
-      console.log(student.planned_classes);
-      updateDisplay();
+      if (student.planned_classes.indexOf(catalog[class_id].name) !== -1) {
+        let tag = "." + catalog[class_id].name + ".added";
+        document.querySelector(tag).classList.remove("added");
+        student.planned_classes.splice(student.planned_classes.indexOf(catalog[class_id].name), 1);
+        console.log(student.planned_classes);
+        updateDisplay();
+      } else {
+        throw Error;
+      }
     } catch (error) {
       alert("You cannot remove a class you did not add.");
     }
@@ -120,7 +145,8 @@ function HomeScreen(props) {
     console.log("You have taken: ", student.current_classes);
     for (var i in catalog[id].pre_requisites) {
       console.log("checking if prereq ", i, " is met");
-      if (student.current_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
+      if (student.completed_classes.indexOf(catalog[id].pre_requisites[i]) === -1
+          && student.current_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
         console.log("Class", catalog[id].pre_requisites[i], "is not met!");
         return false;
       }

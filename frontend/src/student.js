@@ -33,6 +33,17 @@ class Student {
 				|| this.planned_classes.indexOf(class_name) !== -1;
 	}
 
+	is_completed(class_name) {
+		return this.completed_classes.indexOf(class_name) !== -1;
+	}
+
+	is_current(class_name) {
+		return this.current_classes.indexOf(class_name) !== -1;
+	}
+
+	is_planned(class_name) {
+		return this.planned_classes.indexOf(class_name) !== -1;
+	}
     add_completed_class(completed_class) {
 	if (this.completed_classes.indexOf(completed_class) === -1) {
 	    this.completed_classes.push(completed_class);
