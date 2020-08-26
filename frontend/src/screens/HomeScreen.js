@@ -161,7 +161,7 @@ function HomeScreen(props) {
   { 
     catalog.slice(0,1).map((catalog) => 
       <React.Fragment>
-      <span className={"cs_class"} className={catalog.name}>
+      {/* <span className={"cs_class"} className={catalog.name}>
         {catalog.name}
       </span>
       <button onClick = {addCompletedClass.bind(this, 0)}>Apply Credit</button>
@@ -169,16 +169,68 @@ function HomeScreen(props) {
       <button onClick = {addClass.bind(this, 0)}>Pick Class</button>
       <button onClick={removeClass.bind(this, 0)}>Remove Class</button>
       <button onClick = {addClassToPlan.bind(this, 0)}>Add Class To Plan</button>
-      <button onClick={removeClassFromPlan.bind(this, 0)}>Remove From Plan</button>
-      <br/>
-      <br/>
+      <button onClick={removeClassFromPlan.bind(this, 0)}>Remove From Plan</button> */}
+      <table className="table">
+        <tr>
+          <td className="column-name">
+            <p className={"cs_class"} className={catalog.name}>
+              {catalog.name}
+            </p>
+          </td>
+          <td>
+            <button onClick = {addCompletedClass.bind(this, 0)}>Apply Credit</button>
+          </td>
+          <td>
+            <button onClick={removeCompletedClass.bind(this, 0)}>Remove Credit</button>
+          </td>
+          <td>
+            <button onClick = {addClass.bind(this, 0)}>Pick Class</button>
+          </td>
+          <td>
+            <button onClick={removeClass.bind(this, 0)}>Remove Class</button>
+          </td>
+          <td>
+            <button onClick = {addClassToPlan.bind(this, 0)}>Add Class To Plan</button>
+          </td>
+          <td>
+            <button onClick={removeClassFromPlan.bind(this, 0)}>Remove From Plan</button>
+          </td>
+        </tr>
+      </table>
       </React.Fragment>
     )
   }
   { 
     catalog.slice(1,2).map((catalog) => 
       <React.Fragment>
-      <span className={"cs_class"} className={catalog.name}>
+        <table className="table">
+        <tr>
+          <td className="column-name">
+            <p className={"cs_class"} className={catalog.name}>
+              {catalog.name}
+            </p>
+          </td>
+          <td>
+            <button onClick = {addCompletedClass.bind(this, 1)}>Apply Credit</button>
+          </td>
+          <td>
+            <button onClick={removeCompletedClass.bind(this, 1)}>Remove Credit</button>
+          </td>
+          <td>
+            <button onClick = {addClass.bind(this, 1)}>Pick Class</button>
+          </td>
+          <td>
+            <button onClick={removeClass.bind(this, 1)}>Remove Class</button>
+          </td>
+          <td>
+            <button onClick = {addClassToPlan.bind(this, 1)}>Add Class To Plan</button>
+          </td>
+          <td>
+            <button onClick={removeClassFromPlan.bind(this, 1)}>Remove From Plan</button>
+          </td>
+        </tr>
+      </table>
+      {/* <span className={"cs_class"} className={catalog.name}>
         {catalog.name}
       </span>
       <button onClick = {addCompletedClass.bind(this, 1)}>Apply Credit</button>
@@ -188,14 +240,41 @@ function HomeScreen(props) {
       <button onClick = {addClassToPlan.bind(this, 1)}>Add Class To Plan</button>
       <button onClick={removeClassFromPlan.bind(this, 1)}>Remove From Plan</button>
       <br/>
-      <br/>
+      <br/> */}
       </React.Fragment>
     )
   }
   { 
     catalog.slice(2,3).map((catalog) => 
       <React.Fragment>
-      <span className={"cs_class"} className={catalog.name}>
+        <table className="table">
+        <tr>
+          <td className="column-name">
+            <p className={"cs_class"} className={catalog.name}>
+              {catalog.name}
+            </p>
+          </td>
+          <td>
+            <button onClick = {addCompletedClass.bind(this, 2)}>Apply Credit</button>
+          </td>
+          <td>
+            <button onClick={removeCompletedClass.bind(this, 2)}>Remove Credit</button>
+          </td>
+          <td>
+            <button onClick = {addClass.bind(this, 2)}>Pick Class</button>
+          </td>
+          <td>
+            <button onClick={removeClass.bind(this, 2)}>Remove Class</button>
+          </td>
+          <td>
+            <button onClick = {addClassToPlan.bind(this, 2)}>Add Class To Plan</button>
+          </td>
+          <td>
+            <button onClick={removeClassFromPlan.bind(this, 2)}>Remove From Plan</button>
+          </td>
+        </tr>
+      </table>
+      {/* <span className={"cs_class"} className={catalog.name}>
         {catalog.name}
       </span>
       <button onClick = {addCompletedClass.bind(this, 2)}>Apply Credit</button>
@@ -205,7 +284,7 @@ function HomeScreen(props) {
       <button onClick = {addClassToPlan.bind(this, 2)}>Add Class To Plan</button>
       <button onClick={removeClassFromPlan.bind(this, 2)}>Remove From Plan</button>
       <br/>
-      <br/>
+      <br/> */}
       </React.Fragment>
     )
   }

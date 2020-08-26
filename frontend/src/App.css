@@ -38,5 +38,13 @@
 }
 
 .added {
-  color: #61dafb;
+  color: #0000ff;
+}
+
+.table {
+  width: 50%;
+}
+
+.column-name {
+  width: 10%;
 }
