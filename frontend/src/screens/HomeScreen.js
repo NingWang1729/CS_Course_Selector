@@ -133,11 +133,10 @@ function HomeScreen(props) {
       alert("You cannot remove a class you did not add.");
     }
   }
-  
-  
 
   //Currently only returns false if pre-reqs not met.
   //Does not yet display what classes are missing.
+  //TODO: Use the class method for verifyPrerequisites
   function verifyPrerequisites(id) {
     console.log("ID entered is ", id);
     console.log("This correlates to class: ", catalog[id].name);
@@ -159,17 +158,8 @@ function HomeScreen(props) {
   <h2 className="class-display-2">Your current classes:</h2>
   <h2 className="class-display-3">Your planned classes:</h2>
   { 
-    catalog.slice(0,1).map((catalog) => 
+    catalog.map((catalog) => 
       <React.Fragment>
-      {/* <span className={"cs_class"} className={catalog.name}>
-        {catalog.name}
-      </span>
-      <button onClick = {addCompletedClass.bind(this, 0)}>Apply Credit</button>
-      <button onClick={removeCompletedClass.bind(this, 0)}>Remove Credit</button>
-      <button onClick = {addClass.bind(this, 0)}>Pick Class</button>
-      <button onClick={removeClass.bind(this, 0)}>Remove Class</button>
-      <button onClick = {addClassToPlan.bind(this, 0)}>Add Class To Plan</button>
-      <button onClick={removeClassFromPlan.bind(this, 0)}>Remove From Plan</button> */}
       <table className="table">
         <tr>
           <td className="column-name">
@@ -178,113 +168,25 @@ function HomeScreen(props) {
             </p>
           </td>
           <td>
-            <button onClick = {addCompletedClass.bind(this, 0)}>Apply Credit</button>
+            <button onClick = {addCompletedClass.bind(this, catalog.id)}>Apply Credit</button>
           </td>
           <td>
-            <button onClick={removeCompletedClass.bind(this, 0)}>Remove Credit</button>
+            <button onClick={removeCompletedClass.bind(this, catalog.id)}>Remove Credit</button>
           </td>
           <td>
-            <button onClick = {addClass.bind(this, 0)}>Pick Class</button>
+            <button onClick = {addClass.bind(this, catalog.id)}>Pick Class</button>
           </td>
           <td>
-            <button onClick={removeClass.bind(this, 0)}>Remove Class</button>
+            <button onClick={removeClass.bind(this, catalog.id)}>Remove Class</button>
           </td>
           <td>
-            <button onClick = {addClassToPlan.bind(this, 0)}>Add Class To Plan</button>
+            <button onClick = {addClassToPlan.bind(this, catalog.id)}>Add Class To Plan</button>
           </td>
           <td>
-            <button onClick={removeClassFromPlan.bind(this, 0)}>Remove From Plan</button>
+            <button onClick={removeClassFromPlan.bind(this, catalog.id)}>Remove From Plan</button>
           </td>
         </tr>
       </table>
-      </React.Fragment>
-    )
-  }
-  { 
-    catalog.slice(1,2).map((catalog) => 
-      <React.Fragment>
-        <table className="table">
-        <tr>
-          <td className="column-name">
-            <p className={"cs_class"} className={catalog.name}>
-              {catalog.name}
-            </p>
-          </td>
-          <td>
-            <button onClick = {addCompletedClass.bind(this, 1)}>Apply Credit</button>
-          </td>
-          <td>
-            <button onClick={removeCompletedClass.bind(this, 1)}>Remove Credit</button>
-          </td>
-          <td>
-            <button onClick = {addClass.bind(this, 1)}>Pick Class</button>
-          </td>
-          <td>
-            <button onClick={removeClass.bind(this, 1)}>Remove Class</button>
-          </td>
-          <td>
-            <button onClick = {addClassToPlan.bind(this, 1)}>Add Class To Plan</button>
-          </td>
-          <td>
-            <button onClick={removeClassFromPlan.bind(this, 1)}>Remove From Plan</button>
-          </td>
-        </tr>
-      </table>
-      {/* <span className={"cs_class"} className={catalog.name}>
-        {catalog.name}
-      </span>
-      <button onClick = {addCompletedClass.bind(this, 1)}>Apply Credit</button>
-      <button onClick={removeCompletedClass.bind(this, 1)}>Remove Credit</button>
-      <button onClick = {addClass.bind(this, 1)}>Pick Class</button>
-      <button onClick={removeClass.bind(this, 1)}>Remove Class</button>
-      <button onClick = {addClassToPlan.bind(this, 1)}>Add Class To Plan</button>
-      <button onClick={removeClassFromPlan.bind(this, 1)}>Remove From Plan</button>
-      <br/>
-      <br/> */}
-      </React.Fragment>
-    )
-  }
-  { 
-    catalog.slice(2,3).map((catalog) => 
-      <React.Fragment>
-        <table className="table">
-        <tr>
-          <td className="column-name">
-            <p className={"cs_class"} className={catalog.name}>
-              {catalog.name}
-            </p>
-          </td>
-          <td>
-            <button onClick = {addCompletedClass.bind(this, 2)}>Apply Credit</button>
-          </td>
-          <td>
-            <button onClick={removeCompletedClass.bind(this, 2)}>Remove Credit</button>
-          </td>
-          <td>
-            <button onClick = {addClass.bind(this, 2)}>Pick Class</button>
-          </td>
-          <td>
-            <button onClick={removeClass.bind(this, 2)}>Remove Class</button>
-          </td>
-          <td>
-            <button onClick = {addClassToPlan.bind(this, 2)}>Add Class To Plan</button>
-          </td>
-          <td>
-            <button onClick={removeClassFromPlan.bind(this, 2)}>Remove From Plan</button>
-          </td>
-        </tr>
-      </table>
-      {/* <span className={"cs_class"} className={catalog.name}>
-        {catalog.name}
-      </span>
-      <button onClick = {addCompletedClass.bind(this, 2)}>Apply Credit</button>
-      <button onClick={removeCompletedClass.bind(this, 2)}>Remove Credit</button>
-      <button onClick = {addClass.bind(this, 2)}>Pick Class</button>
-      <button onClick={removeClass.bind(this, 2)}>Remove Class</button>
-      <button onClick = {addClassToPlan.bind(this, 2)}>Add Class To Plan</button>
-      <button onClick={removeClassFromPlan.bind(this, 2)}>Remove From Plan</button>
-      <br/>
-      <br/> */}
       </React.Fragment>
     )
   }
