@@ -38,9 +38,7 @@ function HomeScreen(props) {
     }
   }
 
-  //Currently only returns false if pre-reqs not met.
   //Does not yet display what classes are missing.
-  //TODO: Use the class method for verifyPrerequisites
   function verifyPrerequisites(id) {
     console.log("ID entered is ", id);
     console.log("This correlates to class: ", catalog[id].name);
@@ -177,7 +175,7 @@ function HomeScreen(props) {
   function addClassToPlan(class_id) {
     try {
       console.log("Adding class to plan");
-      if (!student.is_scheduled(catalog[class_id].name) && verifyPlannedPrerequisites(class_id)/* && verifyPlannedCorequisites(class_id)*/) {
+      if (!student.is_scheduled(catalog[class_id].name) && verifyPlannedPrerequisites(class_id) && verifyPlannedCorequisites(class_id)) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("added");
         student.planned_classes.push(catalog[class_id].name);
