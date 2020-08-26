@@ -111,7 +111,7 @@ function HomeScreen(props) {
     try {
       if (!student.is_scheduled(catalog[class_id].name)) {
         let tag = "." + catalog[class_id].name;
-        document.querySelector(tag).classList.add("added");
+        document.querySelector(tag).classList.add("completed");
         student.completed_classes.push(catalog[class_id].name);
         console.log(student.completed_classes);
         updateDisplay();
@@ -127,8 +127,8 @@ function HomeScreen(props) {
   function removeCompletedClass(class_id) {
     try {
       if (student.completed_classes.indexOf(catalog[class_id].name) !== -1) {
-        let tag = "." + catalog[class_id].name + ".added";
-        document.querySelector(tag).classList.remove("added");
+        let tag = "." + catalog[class_id].name + ".completed";
+        document.querySelector(tag).classList.remove("completed");
         student.completed_classes.splice(student.completed_classes.indexOf(catalog[class_id].name), 1);
         console.log(student.completed_classes);
         updateDisplay();
@@ -177,7 +177,7 @@ function HomeScreen(props) {
       console.log("Adding class to plan");
       if (!student.is_scheduled(catalog[class_id].name) && verifyPlannedPrerequisites(class_id) && verifyPlannedCorequisites(class_id)) {
         let tag = "." + catalog[class_id].name;
-        document.querySelector(tag).classList.add("added");
+        document.querySelector(tag).classList.add("planned");
         student.planned_classes.push(catalog[class_id].name);
         console.log(student.planned_classes);
         updateDisplay();
@@ -192,8 +192,8 @@ function HomeScreen(props) {
   function removeClassFromPlan(class_id) {
     try {
       if (student.planned_classes.indexOf(catalog[class_id].name) !== -1) {
-        let tag = "." + catalog[class_id].name + ".added";
-        document.querySelector(tag).classList.remove("added");
+        let tag = "." + catalog[class_id].name + ".planned";
+        document.querySelector(tag).classList.remove("planned");
         student.planned_classes.splice(student.planned_classes.indexOf(catalog[class_id].name), 1);
         console.log(student.planned_classes);
         updateDisplay();
