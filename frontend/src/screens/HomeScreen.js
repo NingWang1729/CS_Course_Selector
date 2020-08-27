@@ -35,6 +35,11 @@ function HomeScreen(props) {
     for (var i = 0; i < student.planned_classes.length; i++) {
       document.querySelector(".class-display-3").textContent += "\"" + student.planned_classes[i] + ",\" ";
     }
+    document.querySelector(".class-display-4").textContent = "Your future classes: ";
+    for (var i = 0; i < catalog.length; i++) {
+      if (!student.is_scheduled(catalog[i].credit) && verifyPlannedPrerequisites(catalog[i].id))
+      document.querySelector(".class-display-4").textContent += "\"" + catalog[i].name + ",\" ";
+    }
   }
 
   //Does not yet display what classes are missing.
@@ -108,7 +113,7 @@ function HomeScreen(props) {
 
   function addCompletedClass(class_id) {
     try {
-      if (!student.is_scheduled(catalog[class_id].name)) {
+      if (!student.is_scheduled(catalog[class_id].credit)) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("completed");
         student.completed_classes.push(catalog[class_id].name);
@@ -145,7 +150,7 @@ function HomeScreen(props) {
 
   function addClass(class_id) {
     try {
-      if (!student.is_scheduled(catalog[class_id].name) && verifyPrerequisites(class_id) && verifyCorequisites(class_id)) {
+      if (!student.is_scheduled(catalog[class_id].credit) && verifyPrerequisites(class_id) && verifyCorequisites(class_id)) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("added");
         student.current_classes.push(catalog[class_id].name);
@@ -182,7 +187,7 @@ function HomeScreen(props) {
   function addClassToPlan(class_id) {
     try {
       console.log("Adding class to plan");
-      if (!student.is_scheduled(catalog[class_id].name) && verifyPlannedPrerequisites(class_id) && verifyPlannedCorequisites(class_id)) {
+      if (!student.is_scheduled(catalog[class_id].credit) && verifyPlannedPrerequisites(class_id) && verifyPlannedCorequisites(class_id)) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("planned");
         student.planned_classes.push(catalog[class_id].name);
@@ -312,6 +317,7 @@ function HomeScreen(props) {
         <h2 className="class-display-1">Your completed classes:</h2>
         <h2 className="class-display-2">Your current classes:</h2>
         <h2 className="class-display-3">Your planned classes:</h2>
+        <h2 className="class-display-4" onLoad={updateDisplay}>Your future classes:</h2>
       </div>
     </React.Fragment>
   )
