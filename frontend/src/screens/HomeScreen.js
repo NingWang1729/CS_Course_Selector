@@ -22,16 +22,17 @@ function HomeScreen(props) {
 
   var postData = async () => {
     try {
-      let result = await fetch('http://localhost:5000/cs_classes', {
+      console.log(student.completed_class_credit);
+      let result = await fetch('http://localhost:5000/students', {
         method: 'post',
-        mode: 'no-cors',
+        mode: 'cors',
+        // cache: 'no-cache',
+        // credentials: 'same-origin',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          key1: 'myusername'
-        })
+        body: JSON.stringify(student)
       });
       console.log(result);
     } catch (error) {

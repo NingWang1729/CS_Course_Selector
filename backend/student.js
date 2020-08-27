@@ -2,13 +2,19 @@ class Student {
     name;
     completed_classes;
     current_classes;
-    planned_classes;
+	planned_classes;
+	completed_class_credit;
+	current_class_credit;
+	planned_class_credit;
     
-    constructor(name, completed_classes, current_classes, planned_classes) {
-	this.name = name;
-	this.completed_classes = completed_classes;
-	this.current_classes = current_classes;
-	this.planned_classes = planned_classes;
+    constructor(name, completed_classes, current_classes, planned_classes, completed_class_credit, current_class_credit, planned_class_credit) {
+		this.name = name;
+		this.completed_classes = completed_classes;
+		this.current_classes = current_classes;
+		this.planned_classes = planned_classes;
+		this.completed_class_credit = completed_class_credit;
+		this.current_class_credit = current_class_credit;
+		this.planned_class_credit = planned_class_credit;
     }
 
     get_name() {
@@ -27,6 +33,23 @@ class Student {
 	return this.planned_classes;
     }
 
+	is_scheduled(class_name) {
+		return this.completed_class_credit.indexOf(class_name) !== -1
+				|| this.current_class_credit.indexOf(class_name) !== -1
+				|| this.planned_class_credit.indexOf(class_name) !== -1;
+	}
+
+	is_completed(class_name) {
+		return this.completed_classes.indexOf(class_name) !== -1;
+	}
+
+	is_current(class_name) {
+		return this.current_classes.indexOf(class_name) !== -1;
+	}
+
+	is_planned(class_name) {
+		return this.planned_classes.indexOf(class_name) !== -1;
+	}
     add_completed_class(completed_class) {
 	if (this.completed_classes.indexOf(completed_class) === -1) {
 	    this.completed_classes.push(completed_class);
