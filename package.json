@@ -19,6 +19,8 @@
   "homepage": "https://github.com/NingWang1729/CS_Course_Selector#readme",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "react-router-dom": "^5.2.0"
   },

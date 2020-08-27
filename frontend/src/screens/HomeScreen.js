@@ -20,6 +20,25 @@ function HomeScreen(props) {
     };
   }, []);
 
+  var postData = async () => {
+    try {
+      let result = await fetch('http://localhost:5000/cs_classes', {
+        method: 'post',
+        mode: 'no-cors',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          key1: 'myusername'
+        })
+      });
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   //Displays the classes that have been selected on the homepage dynamically
   function updateDisplay() {
     console.log("Updating display...");
@@ -248,6 +267,9 @@ function HomeScreen(props) {
         <br/>
         <table className="show-hide-buttons">
           <tr>
+            <td>
+              <button onClick={postData}>POST</button>
+            </td>
             <td>
               <button onClick={show.bind(this, "CS")}>Show CS</button>
             </td>
