@@ -215,16 +215,40 @@ function HomeScreen(props) {
       alert("You cannot remove a class you did not add.");
     }
   }
-  function comp() { return catalog[0]};
+
+  function hide(major) {
+    // document.querySelector(".CS").classList.add("hide");
+    let compsci = document.getElementsByClassName(major);
+    for (let i in compsci) {
+      compsci.item(i).classList.add("hide");
+    }
+  };
+
+  function show(major) {
+    try {
+      let compsci = document.getElementsByClassName(major);
+      for (let i in compsci) {
+        compsci.item(i).classList.remove("hide");
+      }
+    } catch (error) {
+    }
+  };
+
   return (<React.Fragment>
   <h2 className="class-display-1">Your completed classes:</h2>
   <h2 className="class-display-2">Your current classes:</h2>
   <h2 className="class-display-3">Your planned classes:</h2>
+  <button onClick={show.bind(this, "CS")}>Show CS</button>
+  <button onClick={hide.bind(this, "CS")}>Hide CS</button>
+  <button onClick={show.bind(this, "ECE")}>Show ECE</button>
+  <button onClick={hide.bind(this, "ECE")}>Hide ECE</button>
+  <button onClick={show.bind(this, "MATH")}>Show MATH</button>
+  <button onClick={hide.bind(this, "MATH")}>Hide MATH</button>
   { 
     catalog.map((catalog) => 
       <React.Fragment>
       <table className="table">
-        <tr>
+        <tr className={catalog.major}>
           <td className="column-name">
             <p className={"cs_class"} className={catalog.name}>
               {catalog.name}

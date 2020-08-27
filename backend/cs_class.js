@@ -2,17 +2,19 @@ class CS_Class {
 	id;
 	name;
 	credit;
-    units;
+	units;
+	major;
     professors;
     pre_requisites;
     co_requisites;
     next_classes;
 
-    constructor(id, name, credit, units, professors, pre_requisites, co_requisites, next_classes) {
+    constructor(id, name, credit, units, major, professors, pre_requisites, co_requisites, next_classes) {
 	this.id = id;
 	this.name = name;
 	this.credit = credit;
 	this.units = units;
+	this.major = major;
 	this.professors = professors;
 	this.pre_requisites = pre_requisites;
 	this.co_requisites = co_requisites;

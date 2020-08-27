@@ -58,3 +58,8 @@
 .column-name {
   width: 10%;
 }
+
+.hide {
+  /* visibility: hidden; */
+  display: none;
+}
