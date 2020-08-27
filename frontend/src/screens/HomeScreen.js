@@ -117,7 +117,7 @@ function HomeScreen(props) {
         console.log(student.completed_class_credit);
         updateDisplay();
       } else {
-        alert("You have already added this class or have not met pre-requisites!");
+        alert("You already have credit for this class or have not met pre-requisites!");
       }
     } catch (error) {
       alert("ERROR");
@@ -154,7 +154,7 @@ function HomeScreen(props) {
         console.log(student.current_class_credit);
         updateDisplay();
       } else {
-        alert("You have already added this class or have not met pre-requisites!");
+        alert("You already have credit for this class or have not met pre-requisites!");
       }
     } catch (error) {
       alert("ERROR");
@@ -191,7 +191,7 @@ function HomeScreen(props) {
         console.log(student.planned_class_credit);
         updateDisplay();
       } else {
-        alert("You have already added this class or have not met pre-requisites!");
+        alert("You already have credit for this class or have not met pre-requisites!");
       }
     } catch {
       alert("ERROR");

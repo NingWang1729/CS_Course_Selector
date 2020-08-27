@@ -34,9 +34,9 @@ class Student {
     }
 
 	is_scheduled(class_name) {
-		return this.completed_classes.indexOf(class_name) !== -1
-				|| this.current_classes.indexOf(class_name) !== -1
-				|| this.planned_classes.indexOf(class_name) !== -1;
+		return this.completed_class_credit.indexOf(class_name) !== -1
+				|| this.current_class_credit.indexOf(class_name) !== -1
+				|| this.planned_class_credit.indexOf(class_name) !== -1;
 	}
 
 	is_completed(class_name) {
