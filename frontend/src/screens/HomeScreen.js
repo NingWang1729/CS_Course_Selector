@@ -234,72 +234,87 @@ function HomeScreen(props) {
     }
   };
 
-  return (<React.Fragment>
-  <h2 className="class-display-1">Your completed classes:</h2>
-  <h2 className="class-display-2">Your current classes:</h2>
-  <h2 className="class-display-3">Your planned classes:</h2>
-  <table className="show-hide-buttons">
-    <tr>
-      <td>
-        <button onClick={show.bind(this, "CS")}>Show CS</button>
-      </td>
-      <td>
-        <button onClick={hide.bind(this, "CS")}>Hide CS</button>
-      </td>
-      <td>
-        <button onClick={show.bind(this, "ECE")}>Show ECE</button>
-      </td>
-      <td>
-        <button onClick={hide.bind(this, "ECE")}>Hide ECE</button>
-      </td>
-      <td>
-        <button onClick={show.bind(this, "MATH")}>Show MATH</button>
-      </td>
-      <td>
-        <button onClick={hide.bind(this, "MATH")}>Hide MATH</button>
-      </td>
-      <td>
-        <button onClick={show.bind(this, "PHYSICS")}>Show PHYSICS</button>
-      </td>
-      <td>
-        <button onClick={hide.bind(this, "PHYSICS")}>Hide PHYSICS</button>
-      </td>
-    </tr>
-  </table>
-  { 
-    catalog.map((catalog) => 
-      <React.Fragment>
-      <table className="table">
-        <tr className={catalog.major}>
-          <td className="column-name">
-            <p className={"cs_class"} className={catalog.name}>
-              {catalog.name}
-            </p>
-          </td>
-          <td>
-            <button onClick = {addCompletedClass.bind(this, catalog.id)}>Apply Credit</button>
-          </td>
-          <td>
-            <button onClick={removeCompletedClass.bind(this, catalog.id)}>Remove Credit</button>
-          </td>
-          <td>
-            <button onClick = {addClass.bind(this, catalog.id)}>Pick Class</button>
-          </td>
-          <td>
-            <button onClick={removeClass.bind(this, catalog.id)}>Remove Class</button>
-          </td>
-          <td>
-            <button onClick = {addClassToPlan.bind(this, catalog.id)}>Add Class To Plan</button>
-          </td>
-          <td>
-            <button onClick={removeClassFromPlan.bind(this, catalog.id)}>Remove From Plan</button>
-          </td>
-        </tr>
-      </table>
-      </React.Fragment>
-    )
-  }
-  </React.Fragment>)
+  return (
+    <React.Fragment>
+      <div className="left">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <table className="show-hide-buttons">
+          <tr>
+            <td>
+              <button onClick={show.bind(this, "CS")}>Show CS</button>
+            </td>
+            <td>
+              <button onClick={hide.bind(this, "CS")}>Hide CS</button>
+            </td>
+            <td>
+              <button onClick={show.bind(this, "ECE")}>Show ECE</button>
+            </td>
+            <td>
+              <button onClick={hide.bind(this, "ECE")}>Hide ECE</button>
+            </td>
+            <td>
+              <button onClick={show.bind(this, "MATH")}>Show MATH</button>
+            </td>
+            <td>
+              <button onClick={hide.bind(this, "MATH")}>Hide MATH</button>
+            </td>
+            <td>
+              <button onClick={show.bind(this, "PHYSICS")}>Show PHYSICS</button>
+            </td>
+            <td>
+              <button onClick={hide.bind(this, "PHYSICS")}>Hide PHYSICS</button>
+            </td>
+          </tr>
+        </table>
+        <br/>
+        <br/>
+        { 
+          catalog.map((catalog) => 
+            <React.Fragment>
+            <table className="table">
+              <tr className={catalog.major}>
+                <td className="column-name">
+                  <p className={"cs_class"} className={catalog.name}>
+                    {catalog.name}
+                  </p>
+                </td>
+                <td>
+                  <button onClick = {addCompletedClass.bind(this, catalog.id)}>Apply Credit</button>
+                </td>
+                <td>
+                  <button onClick={removeCompletedClass.bind(this, catalog.id)}>Remove Credit</button>
+                </td>
+                <td>
+                  <button onClick = {addClass.bind(this, catalog.id)}>Pick Class</button>
+                </td>
+                <td>
+                  <button onClick={removeClass.bind(this, catalog.id)}>Remove Class</button>
+                </td>
+                <td>
+                  <button onClick = {addClassToPlan.bind(this, catalog.id)}>Add Class To Plan</button>
+                </td>
+                <td>
+                  <button onClick={removeClassFromPlan.bind(this, catalog.id)}>Remove From Plan</button>
+                </td>
+              </tr>
+            </table>
+            </React.Fragment>
+          )
+        }
+      </div>
+      <div className="right">
+        <br/>
+        <br/>
+        <br/>
+        <h2 className="class-display-1">Your completed classes:</h2>
+        <h2 className="class-display-2">Your current classes:</h2>
+        <h2 className="class-display-3">Your planned classes:</h2>
+      </div>
+    </React.Fragment>
+  )
 }
 
 export default HomeScreen;

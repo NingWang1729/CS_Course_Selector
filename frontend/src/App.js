@@ -11,7 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="header" onClick={clicked}>
-        <h1>Hello there, UCLA Bruins!</h1>
+        <h1>Welcome, UCLA Bruins!</h1>
       </div>
       <main className="main">
         <div className="content">
