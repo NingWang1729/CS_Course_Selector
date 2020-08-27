@@ -238,12 +238,34 @@ function HomeScreen(props) {
   <h2 className="class-display-1">Your completed classes:</h2>
   <h2 className="class-display-2">Your current classes:</h2>
   <h2 className="class-display-3">Your planned classes:</h2>
-  <button onClick={show.bind(this, "CS")}>Show CS</button>
-  <button onClick={hide.bind(this, "CS")}>Hide CS</button>
-  <button onClick={show.bind(this, "ECE")}>Show ECE</button>
-  <button onClick={hide.bind(this, "ECE")}>Hide ECE</button>
-  <button onClick={show.bind(this, "MATH")}>Show MATH</button>
-  <button onClick={hide.bind(this, "MATH")}>Hide MATH</button>
+  <table className="show-hide-buttons">
+    <tr>
+      <td>
+        <button onClick={show.bind(this, "CS")}>Show CS</button>
+      </td>
+      <td>
+        <button onClick={hide.bind(this, "CS")}>Hide CS</button>
+      </td>
+      <td>
+        <button onClick={show.bind(this, "ECE")}>Show ECE</button>
+      </td>
+      <td>
+        <button onClick={hide.bind(this, "ECE")}>Hide ECE</button>
+      </td>
+      <td>
+        <button onClick={show.bind(this, "MATH")}>Show MATH</button>
+      </td>
+      <td>
+        <button onClick={hide.bind(this, "MATH")}>Hide MATH</button>
+      </td>
+      <td>
+        <button onClick={show.bind(this, "PHYSICS")}>Show PHYSICS</button>
+      </td>
+      <td>
+        <button onClick={hide.bind(this, "PHYSICS")}>Hide PHYSICS</button>
+      </td>
+    </tr>
+  </table>
   { 
     catalog.map((catalog) => 
       <React.Fragment>

@@ -63,3 +63,8 @@
   /* visibility: hidden; */
   display: none;
 }
+
+.show-hide-buttons {
+  width: 50%;
+  justify-content: space-between;
+}
