@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Student from '../student.js';
+// import Catalog from '../../../backend/cs_class_catelog.js';
 
 function HomeScreen(props) {
   //Name, completed classes, current classes,
@@ -214,7 +215,7 @@ function HomeScreen(props) {
       alert("You cannot remove a class you did not add.");
     }
   }
-
+  function comp() { return catalog[0]};
   return (<React.Fragment>
   <h2 className="class-display-1">Your completed classes:</h2>
   <h2 className="class-display-2">Your current classes:</h2>
