@@ -2,13 +2,19 @@ class Student {
     name;
     completed_classes;
     current_classes;
-    planned_classes;
+	planned_classes;
+	completed_class_credit;
+	current_class_credit;
+	planned_class_credit;
     
-    constructor(name, completed_classes, current_classes, planned_classes) {
-	this.name = name;
-	this.completed_classes = completed_classes;
-	this.current_classes = current_classes;
-	this.planned_classes = planned_classes;
+    constructor(name, completed_classes, current_classes, planned_classes, completed_class_credit, current_class_credit, planned_class_credit) {
+		this.name = name;
+		this.completed_classes = completed_classes;
+		this.current_classes = current_classes;
+		this.planned_classes = planned_classes;
+		this.completed_class_credit = completed_class_credit;
+		this.current_class_credit = current_class_credit;
+		this.planned_class_credit = planned_class_credit;
     }
 
     get_name() {

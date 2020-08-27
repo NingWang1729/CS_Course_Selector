@@ -5,7 +5,7 @@ import Student from '../student.js';
 
 function HomeScreen(props) {
   //Name, completed classes, current classes,
-  var student = new Student("Bruin", [], [],[]);
+  var student = new Student("Bruin", [], [], [], [], [], []);
 
   const [catalog, setProduct] = useState([]);
 
@@ -41,10 +41,10 @@ function HomeScreen(props) {
     console.log("ID entered is ", id);
     console.log("This correlates to class: ", catalog[id].name);
     console.log("The prereqs are: ", catalog[id].pre_requisites);
-    console.log("You have taken: ", student.completed_classes);
+    console.log("You have taken: ", student.completed_class_credit);
     for (var i in catalog[id].pre_requisites) {
       console.log("checking if prereq ", i, " is met");
-      if (student.completed_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
+      if (student.completed_class_credit.indexOf(catalog[id].pre_requisites[i]) === -1) {
         console.log("Class", catalog[id].pre_requisites[i], "is not met!");
         return false;
       }
@@ -56,12 +56,12 @@ function HomeScreen(props) {
     console.log("ID entered is ", id);
     console.log("This correlates to class: ", catalog[id].name);
     console.log("The prereqs are: ", catalog[id].pre_requisites);
-    console.log("You have taken: ", student.completed_classes);
-    console.log("You will have taken: ", student.current_classes);
+    console.log("You have taken: ", student.completed_class_credit);
+    console.log("You will have taken: ", student.current_class_credit);
     for (var i in catalog[id].pre_requisites) {
       console.log("checking if prereq ", i, " is met");
-      if (student.completed_classes.indexOf(catalog[id].pre_requisites[i]) === -1
-          && student.current_classes.indexOf(catalog[id].pre_requisites[i]) === -1) {
+      if (student.completed_class_credit.indexOf(catalog[id].pre_requisites[i]) === -1
+          && student.current_class_credit.indexOf(catalog[id].pre_requisites[i]) === -1) {
         console.log("Class", catalog[id].pre_requisites[i], "is not met!");
         return false;
       }
@@ -73,12 +73,12 @@ function HomeScreen(props) {
     console.log("ID entered is ", id);
     console.log("This correlates to class: ", catalog[id].name);
     console.log("The coreqs are: ", catalog[id].co_requisites);
-    console.log("You have taken: ", student.completed_classes);
-    console.log("You are taking: ", student.current_classes);
+    console.log("You have taken: ", student.completed_class_credit);
+    console.log("You are taking: ", student.current_class_credit);
     for (var i in catalog[id].co_requisites) {
       console.log("checking if prereq ", i, " is met");
-      if (student.completed_classes.indexOf(catalog[id].co_requisites[i]) === -1
-          && student.current_classes.indexOf(catalog[id].co_requisites[i]) === -1) {
+      if (student.completed_class_credit.indexOf(catalog[id].co_requisites[i]) === -1
+          && student.current_class_credit.indexOf(catalog[id].co_requisites[i]) === -1) {
         console.log("Class", catalog[id].co_requisites[i], "is not met!");
         return false;
       }
@@ -90,14 +90,14 @@ function HomeScreen(props) {
     console.log("ID entered is ", id);
     console.log("This correlates to class: ", catalog[id].name);
     console.log("The coreqs are: ", catalog[id].co_requisites);
-    console.log("You have taken: ", student.completed_classes);
-    console.log("You are taking: ", student.current_classes);
-    console.log("You will be taking: ", student.planned_classes);
+    console.log("You have taken: ", student.completed_class_credit);
+    console.log("You are taking: ", student.current_class_credit);
+    console.log("You will be taking: ", student.planned_class_credit);
     for (var i in catalog[id].co_requisites) {
       console.log("checking if prereq ", i, " is met");
-      if (student.completed_classes.indexOf(catalog[id].co_requisites[i]) === -1
-          && student.current_classes.indexOf(catalog[id].co_requisites[i]) === -1
-          && student.planned_classes.indexOf(catalog[id].co_requisites[i]) === -1) {
+      if (student.completed_class_credit.indexOf(catalog[id].co_requisites[i]) === -1
+          && student.current_class_credit.indexOf(catalog[id].co_requisites[i]) === -1
+          && student.planned_class_credit.indexOf(catalog[id].co_requisites[i]) === -1) {
         console.log("Class", catalog[id].co_requisites[i], "is not met!");
         return false;
       }
@@ -111,7 +111,9 @@ function HomeScreen(props) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("completed");
         student.completed_classes.push(catalog[class_id].name);
+        student.completed_class_credit.push(catalog[class_id].credit);
         console.log(student.completed_classes);
+        console.log(student.completed_class_credit);
         updateDisplay();
       } else {
         alert("You have already added this class or have not met pre-requisites!");
@@ -128,7 +130,9 @@ function HomeScreen(props) {
         let tag = "." + catalog[class_id].name + ".completed";
         document.querySelector(tag).classList.remove("completed");
         student.completed_classes.splice(student.completed_classes.indexOf(catalog[class_id].name), 1);
+        student.completed_class_credit.splice(student.completed_class_credit.indexOf(catalog[class_id].credit), 1);
         console.log(student.completed_classes);
+        console.log(student.completed_class_credit);
         updateDisplay();
       } else {
         throw Error("You cannot remove a class you did not complete.");
@@ -144,7 +148,9 @@ function HomeScreen(props) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("added");
         student.current_classes.push(catalog[class_id].name);
+        student.current_class_credit.push(catalog[class_id].credit);
         console.log(student.current_classes);
+        console.log(student.current_class_credit);
         updateDisplay();
       } else {
         alert("You have already added this class or have not met pre-requisites!");
@@ -160,7 +166,9 @@ function HomeScreen(props) {
         let tag = "." + catalog[class_id].name + ".added";
         document.querySelector(tag).classList.remove("added");
         student.current_classes.splice(student.current_classes.indexOf(catalog[class_id].name), 1);
+        student.current_class_credit.splice(student.current_class_credit.indexOf(catalog[class_id].credit), 1);
         console.log(student.current_classes);
+        console.log(student.current_class_credit);
         updateDisplay();
       } else {
         throw Error;
@@ -177,7 +185,9 @@ function HomeScreen(props) {
         let tag = "." + catalog[class_id].name;
         document.querySelector(tag).classList.add("planned");
         student.planned_classes.push(catalog[class_id].name);
+        student.planned_class_credit.push(catalog[class_id].credit);
         console.log(student.planned_classes);
+        console.log(student.planned_class_credit);
         updateDisplay();
       } else {
         alert("You have already added this class or have not met pre-requisites!");
@@ -193,7 +203,9 @@ function HomeScreen(props) {
         let tag = "." + catalog[class_id].name + ".planned";
         document.querySelector(tag).classList.remove("planned");
         student.planned_classes.splice(student.planned_classes.indexOf(catalog[class_id].name), 1);
+        student.planned_class_credit.splice(student.planned_class_credit.indexOf(catalog[class_id].credit), 1);
         console.log(student.planned_classes);
+        console.log(student.planned_class_credit);
         updateDisplay();
       } else {
         throw Error;
