@@ -4,8 +4,6 @@ import axios from 'axios';
 import Student from '../student.js';
 
 function HomeScreen(props) {
-  //Currently using an array for student.current_classes rather than object
-  // var student.current_classes = [];
   //Name, completed classes, current classes,
   var student = new Student("Bruin", [], [],[]);
 
