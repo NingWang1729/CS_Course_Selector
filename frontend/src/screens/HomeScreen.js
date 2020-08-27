@@ -8,12 +8,12 @@ function HomeScreen(props) {
   //Name, completed classes, current classes,
   var student = new Student("Bruin", [], [], [], [], [], []);
 
-  const [catalog, setProduct] = useState([]);
+  const [catalog, setCatalog] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const {data} = await axios.get("/cs_classes");
-      setProduct(data);
+      setCatalog(data);
     };
     fetchData();
     return () => {
