@@ -54,18 +54,45 @@ function HomeScreen(props) {
   }
 
   var getData = () => {
-    fetchData();
+    fetchReport();
     console.log(report);
+    try {
+      document.querySelector(".class-display-5.hide").classList.remove("hide");
+      document.querySelector(".class-display-6.hide").classList.remove("hide");
+      document.querySelector(".class-display-7.hide").classList.remove("hide");
+      document.querySelector(".class-display-8.hide").classList.remove("hide");
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      var complete = document.getElementsByClassName("completed");
+      while (complete.length > 0) {
+        complete.item(0).classList.remove("completed");
+      }
+      var current = document.getElementsByClassName("added");
+      while (current.length > 0) {
+        current.item(0).classList.remove("added");
+      }
+      var planned = document.getElementsByClassName("planned");
+      while (planned.length > 0) {
+        planned.item(0).classList.remove("planned");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    document.querySelector(".class-display-5").textContent = "Previous Loadout:";
+    document.querySelector(".class-display-6").textContent = "Completed Classes:";
     for (let i = 0; i < report[0].length; i++) {
-      addCompletedClass(getID(report[0][i]));
+      document.querySelector(".class-display-6").textContent += "\"" + report[0][i] + ",\" ";
     }
-    for (let j = 0; j < report[0].length; j++) {
-      addClass(getID(report[1][j]));
+    document.querySelector(".class-display-7").textContent = "Current Classes:";
+    for (let j = 0; j < report[1].length; j++) {
+      document.querySelector(".class-display-7").textContent += "\"" + report[1][j] + ",\" ";
     }
-    for (let k = 0; k < report[0].length; k++) {
-      addClassToPlan(getID(report[2][k]));
+    document.querySelector(".class-display-8").textContent = "Planned Classes:";
+    for (let k = 0; k < report[2].length; k++) {
+      document.querySelector(".class-display-8").textContent += "\"" + report[2][k] + ",\" ";
     }
-    console.log(student);
   }
 
   function getID(class_name) {
@@ -307,10 +334,10 @@ function HomeScreen(props) {
         <table className="show-hide-buttons">
           <tr>
             <td>
-              <button onClick={postData}>POST</button>
+              <button onClick={postData}>SAVE</button>
             </td>
             <td>
-              <button onClick={getData}>GET</button>
+              <button onClick={getData}>LOAD</button>
             </td>
             <td>
               <button onClick={show.bind(this, "CS")}>Show CS</button>
@@ -378,10 +405,18 @@ function HomeScreen(props) {
         <br/>
         <br/>
         <br/>
+        <h1 className="class-display-0">Current Schedule:</h1>
         <h2 className="class-display-1">Your completed classes:</h2>
         <h2 className="class-display-2">Your current classes:</h2>
         <h2 className="class-display-3">Your planned classes:</h2>
-        <h2 className="class-display-4" onLoad={updateDisplay}>Your future classes:</h2>
+        <h2 className="class-display-4">Your future classes:</h2>
+        <br/>
+        <br/>
+        <h1 className="class-display-5 hide">Previous Loadout:</h1>
+        <h2 className="class-display-6 hide">Your completed classes:</h2>
+        <h2 className="class-display-7 hide">Your current classes:</h2>
+        <h2 className="class-display-8 hide">Your planned classes:</h2>
+        <h2 className="class-display-9 hide">Your future classes:</h2>
       </div>
     </React.Fragment>
   )
