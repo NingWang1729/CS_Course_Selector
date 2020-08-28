@@ -31,7 +31,7 @@ class Student {
 
     get_planned_classes() {
 	return this.planned_classes;
-    }
+	}
 
 	is_scheduled(class_name) {
 		return this.completed_class_credit.indexOf(class_name) !== -1

@@ -29,6 +29,9 @@ app.post("/cs_classes", (req, res) => {
 
 app.post("/students", (req, res) => {
     console.log(req);
+    student.completed_classes = req.body.completed_classes;
+    student.current_classes = req.body.current_classes;
+    student.planned_classes = req.body.planned_classes;
     student.completed_class_credit = req.body.completed_class_credit;
     student.current_class_credit = req.body.current_class_credit;
     student.planned_class_credit = req.body.planned_class_credit;
