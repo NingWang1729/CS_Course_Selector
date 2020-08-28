@@ -2,25 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Student from '../student.js';
+// import Student from '../../../backend/student.js';
 // import Catalog from '../../../backend/cs_class_catelog.js';
 
 function HomeScreen(props) {
   //Name, completed classes, current classes,
-  var student = new Student("Bruin", [], [], [], [], [], []);
+  const student = new Student("Bruin", [], [], [], [], [], []);
 
   const [catalog, setCatalog] = useState([]);
+  const [report, setReport] = useState([]);
 
+  const fetchData = async () => {
+    const {data} = await axios.get("/cs_classes");
+    setCatalog(data);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const {data} = await axios.get("/cs_classes");
-      setCatalog(data);
-    };
     fetchData();
     return () => {
     };
   }, []);
 
-  var postData = async () => {
+  const fetchReport = async () => {
+    const {data} = await axios.get("/students");
+    setReport(data);
+  };
+  useEffect(() => {
+    fetchReport();
+    console.log(report);
+    return () => {
+    };
+  }, []);
+
+  const postData = async () => {
     try {
       console.log(student.completed_class_credit);
       let result = await fetch('http://localhost:5000/students', {
@@ -40,6 +53,30 @@ function HomeScreen(props) {
     }
   }
 
+  var getData = () => {
+    fetchData();
+    console.log(report);
+    for (let i = 0; i < report[0].length; i++) {
+      addCompletedClass(getID(report[0][i]));
+    }
+    for (let j = 0; j < report[0].length; j++) {
+      addClass(getID(report[1][j]));
+    }
+    for (let k = 0; k < report[0].length; k++) {
+      addClassToPlan(getID(report[2][k]));
+    }
+    console.log(student);
+  }
+
+  function getID(class_name) {
+    for (let i = 0; i < catalog.length; i++) {
+      if (catalog[i].name === class_name) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   //Displays the classes that have been selected on the homepage dynamically
   function updateDisplay() {
     console.log("Updating display...");
@@ -48,17 +85,18 @@ function HomeScreen(props) {
       document.querySelector(".class-display-1").textContent += "\"" + student.completed_classes[i] + ",\" ";
     }
     document.querySelector(".class-display-2").textContent = "Your current classes: ";
-    for (var i = 0; i < student.current_classes.length; i++) {
-      document.querySelector(".class-display-2").textContent += "\"" + student.current_classes[i] + ",\" ";
+    for (var j = 0; j < student.current_classes.length; j++) {
+      document.querySelector(".class-display-2").textContent += "\"" + student.current_classes[j] + ",\" ";
     }
     document.querySelector(".class-display-3").textContent = "Your planned classes: ";
-    for (var i = 0; i < student.planned_classes.length; i++) {
-      document.querySelector(".class-display-3").textContent += "\"" + student.planned_classes[i] + ",\" ";
+    for (var k = 0; k < student.planned_classes.length; k++) {
+      document.querySelector(".class-display-3").textContent += "\"" + student.planned_classes[k] + ",\" ";
     }
     document.querySelector(".class-display-4").textContent = "Your future classes: ";
-    for (var i = 0; i < catalog.length; i++) {
-      if (!student.is_scheduled(catalog[i].credit) && verifyPlannedPrerequisites(catalog[i].id))
-      document.querySelector(".class-display-4").textContent += "\"" + catalog[i].name + ",\" ";
+    for (var l = 0; l < catalog.length; l++) {
+      if (!student.is_scheduled(catalog[l].credit) && verifyPlannedPrerequisites(catalog[l].id)) {
+        document.querySelector(".class-display-4").textContent += "\"" + catalog[l].name + ",\" ";
+      }
     }
   }
 
@@ -270,6 +308,9 @@ function HomeScreen(props) {
           <tr>
             <td>
               <button onClick={postData}>POST</button>
+            </td>
+            <td>
+              <button onClick={getData}>GET</button>
             </td>
             <td>
               <button onClick={show.bind(this, "CS")}>Show CS</button>

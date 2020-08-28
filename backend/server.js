@@ -7,7 +7,7 @@ import Student from './student.js'
 
 // import Student from './student.js';
 
-const student = new Student("Bruin", [], [], [], [], [], []);
+const student = [[], [], [], [], [], []];
 const catalog = Catalog;
 
 const app = express();
@@ -29,12 +29,12 @@ app.post("/cs_classes", (req, res) => {
 
 app.post("/students", (req, res) => {
     console.log(req);
-    student.completed_classes = req.body.completed_classes;
-    student.current_classes = req.body.current_classes;
-    student.planned_classes = req.body.planned_classes;
-    student.completed_class_credit = req.body.completed_class_credit;
-    student.current_class_credit = req.body.current_class_credit;
-    student.planned_class_credit = req.body.planned_class_credit;
+    student[0] = req.body.completed_classes;
+    student[1] = req.body.current_classes;
+    student[2] = req.body.planned_classes;
+    student[3] = req.body.completed_class_credit;
+    student[4] = req.body.current_class_credit;
+    student[5] = req.body.planned_class_credit;
 })
 
 app.listen(5000, () => {
