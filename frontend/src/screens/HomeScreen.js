@@ -9,6 +9,11 @@ function HomeScreen(props) {
   //Name, completed classes, current classes,
   const student = new Student("Bruin", [], [], [], [], [], []);
 
+  const state = {
+    year: 0,
+    quarter: 0
+  }
+
   const [catalog, setCatalog] = useState([]);
   const [report, setReport] = useState([]);
 
@@ -410,13 +415,30 @@ function HomeScreen(props) {
         <h2 className="class-display-2">Your current classes:</h2>
         <h2 className="class-display-3">Your planned classes:</h2>
         <h2 className="class-display-4">Your future classes:</h2>
-        <br/>
-        <br/>
         <h1 className="class-display-5 hide">Previous Loadout:</h1>
         <h2 className="class-display-6 hide">Your completed classes:</h2>
         <h2 className="class-display-7 hide">Your current classes:</h2>
         <h2 className="class-display-8 hide">Your planned classes:</h2>
         <h2 className="class-display-9 hide">Your future classes:</h2>
+        <span className="Freshman Q0">Freshman Summer:</span>
+        <span className="Freshman Q1">Freshman Fall:</span>
+        <span className="Freshman Q2">Freshman Winter:</span>
+        <span className="Freshman Q3">Freshman Spring:</span>
+        <br/>
+        <span className="Sophmore Q0">Sophmore Summer:</span>
+        <span className="Sophmore Q1">Sophomore Fall:</span>
+        <span className="Sophmore Q2">Sophomore Winter:</span>
+        <span className="Sophmore Q3">Sophomore Spring:</span>
+        <br/>
+        <span className="Junior Q0">Junior Summer:</span>
+        <span className="Junior Q1">Junior Fall:</span>
+        <span className="Junior Q2">Junior Winter:</span>
+        <span className="Junior Q3">Junior Spring:</span>
+        <br/>
+        <span className="Senior Q0">Senior Summer:</span>
+        <span className="Senior Q1">Senior Fall:</span>
+        <span className="Senior Q2">Senior Winter:</span>
+        <span className="Senior Q3">Senior Spring:</span>
       </div>
     </React.Fragment>
   )
