@@ -9,10 +9,7 @@ function HomeScreen(props) {
   //Name, completed classes, current classes,
   const student = new Student("Bruin", [], [], [], [], [], []);
 
-  const state = {
-    year: 0,
-    quarter: 0
-  }
+  var state = [0, 0];
 
   const [catalog, setCatalog] = useState([]);
   const [report, setReport] = useState([]);
@@ -40,6 +37,38 @@ function HomeScreen(props) {
 
   const postData = async () => {
     try {
+      console.log("Adding to Calender");
+      //Add to calender
+      alert("ADDING TO CALENDER");
+      let tag = ".";
+      switch (state[0]) {
+        case 0:
+          tag += "Freshman";
+          break;
+        case 1:
+          tag += "Sophomore";
+          break;
+        case 2:
+          tag += "Junior";
+          break;
+        case 3:
+          tag += "Senior";
+          break;
+        default:
+          tag += "Senior";
+          break;
+      }
+      tag += ".Q" + state[1].toString();
+      alert(tag);
+      for (let i in student.current_classes) {
+        document.querySelector(tag).textContent += student.current_classes[i];
+        alert("You added class to calender, yay!");
+      }
+      if (++state[1] % 4 === 0) {
+        state[1] = 0;
+        state[0]++;
+      }
+      alert(state);
       console.log(student.completed_class_credit);
       let result = await fetch('http://localhost:5000/students', {
         method: 'post',
@@ -53,6 +82,7 @@ function HomeScreen(props) {
         body: JSON.stringify(student)
       });
       console.log(result);
+      
     } catch (error) {
       console.log(error);
     }
